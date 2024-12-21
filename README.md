@@ -1,1 +1,1 @@
-https://mykeejet.github.io/chatme/
+https://mykeejet.github.io/chatme/login.html
