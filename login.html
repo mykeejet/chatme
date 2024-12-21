@@ -8,9 +8,10 @@
 </head>
 <body>
     <style>
-        body {
+            /* Body Styling */
+body {
     margin: 0;
-    height: 100vh;
+    height: 100vh; /* Full viewport height */
     overflow: hidden; /* Prevent scrolling */
     display: flex;
     align-items: center;
@@ -19,6 +20,7 @@
     font-family: Arial, sans-serif;
 }
 
+/* Loading Container */
 .loading-container {
     position: absolute;
     top: 0;
@@ -29,9 +31,10 @@
     align-items: center;
     justify-content: center;
     background-color: #f4f4f4; /* Optional background color */
-    z-index: 1000; /* Ensures it's on top of everything else */
+    z-index: 1000; /* Ensures it stays on top */
 }
 
+/* Loading Animation */
 .loading-animation {
     display: flex;
     gap: 8px;
@@ -40,7 +43,7 @@
 .circle {
     width: 10px;
     height: 10px;
-    background-color: #fff; /* Twitter blue color */
+    background-color: #fff; /* Circle color */
     border-radius: 50%;
     animation: bounce 0.6s infinite ease-in-out;
 }
@@ -53,6 +56,7 @@
     animation-delay: 0.4s;
 }
 
+/* Bounce Animation */
 @keyframes bounce {
     0%, 80%, 100% {
         transform: scale(0);
@@ -62,6 +66,7 @@
     }
 }
 
+/* Hello World Text */
 .hello-world {
     font-size: 24px;
     color: #333;
@@ -70,9 +75,15 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); /* Center it */
-    z-index: 1001; /* Ensure it's above other content */
+    transform: translate(-50%, -50%); /* Center text */
+    z-index: 1001; /* Ensure it appears above other content */
 }
+
+/* Utility Class */
+.hidden {
+    display: none; /* For hiding elements */
+}
+
 
        .imgg{
            height: 70px;
