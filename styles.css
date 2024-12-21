@@ -22,7 +22,7 @@ body {
 .circle {
     width: 10px;
     height: 10px;
-    background-color: #1da1f2; /* Twitter blue color */
+    background-color: #fff; /* Twitter blue color */
     border-radius: 50%;
     animation: bounce 0.6s infinite ease-in-out;
 }
