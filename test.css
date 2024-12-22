@@ -5,7 +5,7 @@ body {
   align-items: center;
   height: 100vh;
   margin: 0;
-  background: #f3f3f3;
+  background: #fff;
 }
 
 .form-container {
@@ -21,31 +21,11 @@ body {
   margin-bottom: 20px;
 }
 
-input {
-  width: 100%;
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  outline: none;
-  background: none;
-  transition: border-color 0.3s;
-}
 
 input:focus {
   border-color: #007bff;
 }
 
-label {
-  position: absolute;
-  left: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 16px;
-  color: transparent; /* Hidden by default */
-  pointer-events: none;
-  transition: all 0.3s ease;
-}
 
 input:focus + label,
 input:not(:placeholder-shown) + label {
