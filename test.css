@@ -8,22 +8,15 @@ body {
   background: #fff;
 }
 
-.form-container {
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  width: 300px;
+input:focus {
+  border-color: #007bff;
+  border-width: 3px; /* Adjust thickness as needed */
 }
+
 
 .form-group {
   position: relative;
   margin-bottom: 20px;
-}
-
-
-input:focus {
-  border-color: #007bff;
 }
 
 
