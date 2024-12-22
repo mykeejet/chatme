@@ -7,6 +7,41 @@
   <link rel="stylesheet" href="test.css">
 </head>
 <body>
+  <style>
+    input {
+    width: 100%;
+    height: 40px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    outline: none;
+    background: none;
+    transition: border-color 0.3s;
+}
+.form-container {
+    border-radius: 10px;
+    width: 300px;
+    position: relative;
+    margin: 8% auto 0;
+    margin-left: 17px;
+}
+.form-group {
+    position: relative;
+    margin-bottom: 0px;
+}
+
+label {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: transparent;
+    pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.25, 0.1, 0, -0.94);
+    }
+  </style>
   <div class="form-container">
     <form>
       <div class="form-group">
