@@ -45,6 +45,12 @@
       border-color: #007bff;
       border-width: 2.2px;
     }
+  input:focus + label,
+input:not(:placeholder-shown) + label {
+  top: 5px;
+  font-size: 12px;
+  color: #ccc; /* Visible when focused or text is entered */
+}
 
     /* Label Styling */
     label {
