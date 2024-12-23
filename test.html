@@ -51,9 +51,10 @@
       position: absolute;
       left: 10px;
       top: 50%;
+      margin-top: 6.7px;
       transform: translateY(-50%);
       font-size: 16px;
-      color: #ccc;
+      color: transparent;
       pointer-events: none;
       transition: all 0.3s cubic-bezier(0, 2.44, 0, 0.66);
     }
@@ -113,12 +114,12 @@
     <form>
       <!-- Email Field -->
       <div class="form-group">
-        <input type="text" id="email" placeholder=" " required>
+        <input type="text" id="email" placeholder="Email" required>
         <label for="email">Email</label>
       </div>
       <!-- Password Field -->
       <div class="form-group">
-        <input type="password" id="password" placeholder=" " required>
+        <input type="password" id="password" placeholder="Password" required>
         <label for="password">Password</label>
         <span class="show-hide" id="showHide">Show</span>
       </div>
@@ -147,6 +148,29 @@
         submitBtn.style.display = "none"; // Hide Submit Button
       }
     }
+
+    // Placeholder Logic
+    emailInput.addEventListener("focus", () => {
+      emailInput.setAttribute("data-placeholder", emailInput.placeholder); // Save placeholder
+      emailInput.placeholder = ""; // Clear placeholder
+    });
+
+    emailInput.addEventListener("blur", () => {
+      if (emailInput.value.trim() === "") {
+        emailInput.placeholder = emailInput.getAttribute("data-placeholder"); // Restore placeholder
+      }
+    });
+
+    passwordInput.addEventListener("focus", () => {
+      passwordInput.setAttribute("data-placeholder", passwordInput.placeholder); // Save placeholder
+      passwordInput.placeholder = ""; // Clear placeholder
+    });
+
+    passwordInput.addEventListener("blur", () => {
+      if (passwordInput.value.trim() === "") {
+        passwordInput.placeholder = passwordInput.getAttribute("data-placeholder"); // Restore placeholder
+      }
+    });
 
     // Show/Hide Password Logic
     passwordInput.addEventListener("input", () => {
