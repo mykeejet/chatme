@@ -8,64 +8,53 @@
 <body>
   <style>
     button {
-    width: 322px;
-    outline: none;
-    border: none;
-    font-weight: bold;
-    border-radius: 5px;
-    height: 42px;
-    padding: 10px;
-    position: relative;
-    margin-top: 8px;
-    background-color: rgb(44 128 211);
-    color: #fff;
-}
-  body {
-  font-family: Arial, sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
-  background: #fff;
-  }
-  .form-group {
-  position: relative;
-  margin-bottom: 18px;
-}
-
-
-input:focus + label,
-input:not(:placeholder-shown) + label {
-  top: 5px;
-  font-size: 12px;
-  color: #ccc; /* Visible when focused or text is entered */
-}
-    input {
-    width: 100%;
-    height: 31px;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 2px;
-    outline: none;
-    background: none;
-    transition: border-color 0.3s;
-}
-
-    input:focus {
-      border-color: #007bff;
-      border-width: 2.2px;
+      width: 322px;
+      outline: none;
+      border: none;
+      font-weight: bold;
+      border-radius: 5px;
+      height: 42px;
+      padding: 10px;
+      position: relative;
+      margin-top: 8px;
+      background-color: rgb(44 128 211);
+      color: #fff;
+      display: none; /* Initially hide the button */
     }
-
-
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background: #fff;
+    }
+    .form-group {
+      position: relative;
+      margin-bottom: 18px;
+    }
     input:focus + label,
     input:not(:placeholder-shown) + label {
       top: 5px;
       font-size: 12px;
-      color: #007bff;
+      color: #ccc;
     }
-
+    input {
+      width: 100%;
+      height: 31px;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 2px;
+      outline: none;
+      background: none;
+      transition: border-color 0.3s;
+    }
+    input:focus {
+      border-color: #007bff;
+      border-width: 2.2px;
+    }
     .form-container {
       border-radius: 10px;
       width: 300px;
@@ -73,26 +62,25 @@ input:not(:placeholder-shown) + label {
       margin: 8% auto 0;
       margin-left: 17px;
     }
-
-label {
-    position: absolute;
-    left: 10px;
-    top: 50%;
-    margin-top: 6.7px;
-    transform: translateY(-50%);
-    font-size: 16px;
-    color: transparent;
-    pointer-events: none;
-    transition: all 0.3s cubic-bezier(0, 1.53, 0, 0.01);
-}
+    label {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      margin-top: 6.7px;
+      transform: translateY(-50%);
+      font-size: 16px;
+      color: transparent;
+      pointer-events: none;
+      transition: all 0.3s cubic-bezier(0, 1.53, 0, 0.01);
+    }
     @media (min-width: 650px) {
-    .form-container {
-    border-radius: 10px;
-    width: 300px;
-    position: relative;
-    margin: 8% auto 0;
-}
-}
+      .form-container {
+        border-radius: 10px;
+        width: 300px;
+        position: relative;
+        margin: 8% auto 0;
+      }
+    }
   </style>
   <div class="form-container">
     <form>
@@ -104,24 +92,20 @@ label {
         <input type="password" id="password" placeholder="Password" required>
         <label for="password">Password</label>
       </div>
-      <button type="submit">Submit</button>
+      <button type="submit" id="submitBtn">Submit</button>
     </form>
   </div>
   <script>
-    document.querySelectorAll('.form-group input').forEach((input) => {
-      // On focus: Hide placeholder
-      input.addEventListener('focus', () => {
-        input.setAttribute('placeholder', '');
-        input.nextElementSibling.style.color = '#ccc'; // Show label
-      });
+    const passwordInput = document.getElementById("password");
+    const submitButton = document.getElementById("submitBtn");
 
-      // On blur: Restore placeholder if input is empty
-      input.addEventListener('blur', () => {
-        if (!input.value) {
-          input.setAttribute('placeholder', input.id.charAt(0).toUpperCase() + input.id.slice(1)); // Add placeholder
-          input.nextElementSibling.style.color = 'transparent'; // Hide label
-        }
-      });
+    // Monitor password input
+    passwordInput.addEventListener("input", () => {
+      if (passwordInput.value.length === 6) {
+        submitButton.style.display = "block"; // Show the button
+      } else {
+        submitButton.style.display = "none"; // Hide the button
+      }
     });
   </script>
 </body>
