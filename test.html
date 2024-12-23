@@ -47,17 +47,16 @@
     }
 
     /* Label Styling */
-label {
-    position: absolute;
-    left: 10px;
-    top: 50%;
-    margin-top: 6.7px;
-    transform: translateY(-50%);
-    font-size: 16px;
-    color: transparent;
-    pointer-events: none;
-    transition: all 0.3s cubic-bezier(0, 2.44, 0, 0.66);
-}
+    label {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 16px;
+      color: #ccc;
+      pointer-events: none;
+      transition: all 0.3s cubic-bezier(0, 2.44, 0, 0.66);
+    }
 
     input:focus + label,
     input:not(:placeholder-shown) + label {
@@ -114,12 +113,12 @@ label {
     <form>
       <!-- Email Field -->
       <div class="form-group">
-        <input type="text" id="email" placeholder="Email" required>
+        <input type="text" id="email" placeholder=" " required>
         <label for="email">Email</label>
       </div>
       <!-- Password Field -->
       <div class="form-group">
-        <input type="password" id="password" placeholder="Password" required>
+        <input type="password" id="password" placeholder=" " required>
         <label for="password">Password</label>
         <span class="show-hide" id="showHide">Show</span>
       </div>
@@ -177,3 +176,4 @@ label {
   </script>
 </body>
 </html>
+
