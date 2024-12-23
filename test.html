@@ -45,25 +45,18 @@
       border-color: #007bff;
       border-width: 2.2px;
     }
-  input:focus + label,
-input:not(:placeholder-shown) + label {
-  top: 5px;
-  font-size: 12px;
-  color: #ccc; /* Visible when focused or text is entered */
-}
 
     /* Label Styling */
     label {
-    position: absolute;
-    left: 10px;
-    top: 50%;
-    margin-top: 6.7px;
-    transform: translateY(-50%);
-    font-size: 16px;
-    color: transparent;
-    pointer-events: none;
-    transition: all 0.3s cubic-bezier(0, 1.53, 0, 0.01);
-}
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 16px;
+      color: transparent;
+      pointer-events: none;
+      transition: all 0.3s cubic-bezier(0, 1.53, 0, 0.01);
+    }
 
     input:focus + label,
     input:not(:placeholder-shown) + label {
@@ -136,10 +129,24 @@ input:not(:placeholder-shown) + label {
     </form>
   </div>
   <script>
+    const emailInput = document.getElementById("email");
     const passwordInput = document.getElementById("password");
     const showHide = document.getElementById("showHide");
     const defaultBtn = document.getElementById("defaultBtn");
     const submitBtn = document.getElementById("submitBtn");
+
+    function toggleButtonVisibility() {
+      const isEmailValid = emailInput.value.trim().length > 0;
+      const isPasswordValid = passwordInput.value.length >= 6;
+
+      if (isEmailValid && isPasswordValid) {
+        defaultBtn.style.display = "none"; // Hide Default Button
+        submitBtn.style.display = "block"; // Show Submit Button
+      } else {
+        defaultBtn.style.display = "block"; // Show Default Button
+        submitBtn.style.display = "none"; // Hide Submit Button
+      }
+    }
 
     // Show/Hide Password Logic
     passwordInput.addEventListener("input", () => {
@@ -151,16 +158,10 @@ input:not(:placeholder-shown) + label {
         showHide.textContent = "Show";
         passwordInput.type = "password"; // Reset to password type
       }
-
-      // Toggle Default Button and Submit Button visibility
-      if (passwordInput.value.length >= 6) {
-        defaultBtn.style.display = "none"; // Hide Default Button
-        submitBtn.style.display = "block"; // Show Submit Button
-      } else {
-        defaultBtn.style.display = "block"; // Show Default Button
-        submitBtn.style.display = "none"; // Hide Submit Button
-      }
+      toggleButtonVisibility();
     });
+
+    emailInput.addEventListener("input", toggleButtonVisibility);
 
     // Toggle Password Visibility
     showHide.addEventListener("click", () => {
