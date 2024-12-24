@@ -160,6 +160,27 @@
   </div>
 
   <script>
+
+    const emailInput = document.getElementById("email");
+    const passwordInput = document.getElementById("password");
+    const showHide = document.getElementById("showHide");
+    const defaultBtn = document.getElementById("defaultBtn");
+    const submitBtn = document.getElementById("submitBtn");
+
+    function toggleButtonVisibility() {
+      const isEmailValid = emailInput.value.trim().length > 0;
+      const isPasswordValid = passwordInput.value.length >= 6;
+
+      if (isEmailValid && isPasswordValid) {
+        defaultBtn.style.display = "none"; // Hide Default Button
+        submitBtn.style.display = "block"; // Show Submit Button
+      } else {
+        defaultBtn.style.display = "block"; // Show Default Button
+        submitBtn.style.display = "none"; // Hide Submit Button
+      }
+    }
+    
+    //placeholder start
     const emailInput = document.getElementById("email");
     const passwordInput = document.getElementById("password");
 
