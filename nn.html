@@ -1,0 +1,68 @@
+<script>
+    const emailInput = document.getElementById("email");
+    const passwordInput = document.getElementById("password");
+    const showHide = document.getElementById("showHide");
+    const defaultBtn = document.getElementById("defaultBtn");
+    const submitBtn = document.getElementById("submitBtn");
+
+    function toggleButtonVisibility() {
+      const isEmailValid = emailInput.value.trim().length > 0;
+      const isPasswordValid = passwordInput.value.length >= 6;
+
+      if (isEmailValid && isPasswordValid) {
+        defaultBtn.style.display = "none"; // Hide Default Button
+        submitBtn.style.display = "block"; // Show Submit Button
+      } else {
+        defaultBtn.style.display = "block"; // Show Default Button
+        submitBtn.style.display = "none"; // Hide Submit Button
+      }
+    }
+
+    // Placeholder start
+    function handlePlaceholder(input) {
+      const placeholder = input.placeholder;
+
+      input.addEventListener("focus", () => {
+        if (!input.value.trim()) {
+          input.placeholder = ""; // Remove placeholder
+        }
+      });
+
+      input.addEventListener("blur", () => {
+        if (!input.value.trim()) {
+          input.placeholder = placeholder; // Restore placeholder only if input is empty
+        }
+      });
+    }
+
+    // Apply placeholder behavior only when input fields are empty
+    [emailInput, passwordInput].forEach((input) => handlePlaceholder(input));
+    // Placeholder end
+
+    // Show/Hide Password Logic
+    passwordInput.addEventListener("input", () => {
+      // Show/Hide toggle only appears when password field has input
+      if (passwordInput.value.length > 0) {
+        showHide.style.display = "inline";
+      } else {
+        showHide.style.display = "none";
+        showHide.textContent = "Show";
+        passwordInput.type = "password"; // Reset to password type
+      }
+      toggleButtonVisibility();
+    });
+
+    emailInput.addEventListener("input", toggleButtonVisibility);
+
+    // Toggle Password Visibility
+    showHide.addEventListener("click", () => {
+      if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        showHide.textContent = "Hide";
+      } else {
+        passwordInput.type = "password";
+        showHide.textContent = "Show";
+      }
+    });
+      </script>
+      
