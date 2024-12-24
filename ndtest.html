@@ -161,6 +161,32 @@
 
   <script>
 
+    // Show/Hide Password Logic
+    passwordInput.addEventListener("input", () => {
+      // Show/Hide toggle only appears when password field has input
+      if (passwordInput.value.length > 0) {
+        showHide.style.display = "inline";
+      } else {
+        showHide.style.display = "none";
+        showHide.textContent = "Show";
+        passwordInput.type = "password"; // Reset to password type
+      }
+      toggleButtonVisibility();
+    });
+
+    emailInput.addEventListener("input", toggleButtonVisibility);
+
+    // Toggle Password Visibility
+    showHide.addEventListener("click", () => {
+      if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        showHide.textContent = "Hide";
+      } else {
+        passwordInput.type = "password";
+        showHide.textContent = "Show";
+      }
+    });
+
     const emailInput = document.getElementById("email");
     const passwordInput = document.getElementById("password");
     const showHide = document.getElementById("showHide");
