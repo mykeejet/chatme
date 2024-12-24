@@ -1,4 +1,170 @@
-<script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Form</title>
+  <style>
+    /* General Styles */
+    input#password {
+    padding-right: 68px;
+    width: 240px;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background: #fff;
+    }
+
+    .form-container {
+      border-radius: 10px;
+      width: 300px;
+      position: relative;
+      margin: 8% auto 0;
+    }
+
+    .form-group {
+      position: relative;
+      margin-bottom: 18px;
+    }
+
+    /* Input Field Styling */
+    input {
+      width: 100%;
+      height: 31px;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 2px;
+      outline: none;
+      background: none;
+      transition: border-color 0.3s;
+    }
+
+    input:focus {
+      border-color: #007bff;
+      border-width: 2.2px;
+    }
+
+    /* Label Styling */
+    label {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      margin-top: 6.7px;
+      transform: translateY(-50%);
+      font-size: 16px;
+      color: transparent;
+      pointer-events: none;
+      transition: all 0.3s cubic-bezier(0, 2.44, 0, 0.66);
+    }
+    input:focus + label, input:not(:placeholder-shown) + label {
+    top: 5px;
+    font-size: 12px;
+    color: #8996a3;
+}
+
+    /* Button Styling */
+    button {
+      width: 322px;
+      outline: none;
+      border: none;
+      font-weight: bold;
+      border-radius: 5px;
+      height: 42px;
+      padding: 10px;
+      position: relative;
+      margin-top: 8px;
+      background-color: rgb(44, 128, 211);
+      color: #fff;
+      display: none; /* Hidden by default */
+    }
+
+    /* Default Div Button (btn) Styling */
+.btn {
+    width: 316px;
+    outline: none;
+    border: none;
+    font-weight: bold;
+    border-radius: 5px;
+    height: 36px;
+    padding: 3px;
+    position: relative;
+    text-align: center;
+    margin-top: 8px;
+    background-color: rgb(208 232 255);
+    color: #fff;
+    text-align: center;
+}
+.inn {
+    position: relative;
+    margin-top: 10px;
+    font-size: 13.4px;
+}
+
+    /* Show/Hide Text Styling */
+    .show-hide {
+    font-size: 14px;
+    color: #b1b1c5;
+    cursor: pointer;
+    position: absolute;
+    display: none;
+    margin-left: 270px;
+    margin-top: -38.6px;
+    text-decoration: none;
+}
+      @media all and (max-width: 480px) {
+    body {
+    font-family: Arial, sans-serif;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: absolute;
+    height: auto;
+    display: flex;
+    top: 230px;
+    left: 10px;
+    background: #fff;
+}
+
+.form-container {
+    border-radius: 10px;
+    width: 300px;
+    height: auto;
+    position: ABSOLUTE;
+    margin-left: 313px;
+    margin-top: 175px;
+    margin-right: 0px;
+}
+      }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <form>
+      <!-- Email Field -->
+      <div class="form-group">
+        <input type="text" id="email" placeholder="Email" required>
+        <label for="email">Email</label>
+      </div>
+      <!-- Password Field -->
+      <div class="form-group">
+        <input type="password" id="password" placeholder="Password" required>
+        <label for="password">Password</label>
+        <span class="show-hide" id="showHide">Show</span>
+      </div>
+      <!-- Default Button -->
+      <div class="btn" id="defaultBtn"><p class="inn">Login</p></div>
+      <!-- Submit Button -->
+      <button type="submit" id="submitBtn">Login</button>
+    </form>
+  </div>
+  
+    <script>
     const emailInput = document.getElementById("email");
     const passwordInput = document.getElementById("password");
     const showHide = document.getElementById("showHide");
@@ -64,5 +230,6 @@
         showHide.textContent = "Show";
       }
     });
-      </script>
-      
+    </script>
+</body>
+</html>
