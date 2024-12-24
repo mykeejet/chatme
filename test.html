@@ -163,7 +163,8 @@
       <button type="submit" id="submitBtn">Login</button>
     </form>
   </div>
-  <script>
+  
+    <script>
     const emailInput = document.getElementById("email");
     const passwordInput = document.getElementById("password");
     const showHide = document.getElementById("showHide");
@@ -183,28 +184,26 @@
       }
     }
 
-    // Placeholder Logic
-    emailInput.addEventListener("focus", () => {
-      emailInput.setAttribute("data-placeholder", emailInput.placeholder); // Save placeholder
-      emailInput.placeholder = ""; // Clear placeholder
-    });
+    // Placeholder start
+    function handlePlaceholder(input) {
+      const placeholder = input.placeholder;
 
-    emailInput.addEventListener("blur", () => {
-      if (emailInput.value.trim() === "") {
-        emailInput.placeholder = emailInput.getAttribute("data-placeholder"); // Restore placeholder
-      }
-    });
+      input.addEventListener("focus", () => {
+        if (!input.value.trim()) {
+          input.placeholder = ""; // Remove placeholder
+        }
+      });
 
-    passwordInput.addEventListener("focus", () => {
-      passwordInput.setAttribute("data-placeholder", passwordInput.placeholder); // Save placeholder
-      passwordInput.placeholder = ""; // Clear placeholder
-    });
+      input.addEventListener("blur", () => {
+        if (!input.value.trim()) {
+          input.placeholder = placeholder; // Restore placeholder only if input is empty
+        }
+      });
+    }
 
-    passwordInput.addEventListener("blur", () => {
-      if (passwordInput.value.trim() === "") {
-        passwordInput.placeholder = passwordInput.getAttribute("data-placeholder"); // Restore placeholder
-      }
-    });
+    // Apply placeholder behavior only when input fields are empty
+    [emailInput, passwordInput].forEach((input) => handlePlaceholder(input));
+    // Placeholder end
 
     // Show/Hide Password Logic
     passwordInput.addEventListener("input", () => {
@@ -231,7 +230,6 @@
         showHide.textContent = "Show";
       }
     });
-  </script>
+    </script>
 </body>
 </html>
-
