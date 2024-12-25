@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="apple-touch-icon" href="icon.png"> <!-- iOS App Icon -->
+    <title>Web version of WeinG</title>
+    <style>
+        /* Body Styling */
+        body {
+            margin: 0;
+            height: 100vh; /* Full viewport height */
+            overflow: hidden; /* Prevent scrolling */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #fff;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Loading Container */
+        .loading-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh; /* Full viewport height */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #fff; /* Optional background color */
+            z-index: 1000; /* Ensures it stays on top */
+        }
+
+        .imgg {
+            height: 70px;
+            top: -30px;
+            position: relative;
+        }
+
+        iframe {
+            display: none; /* Hide the iframe */
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-container">
+        <div class="loading-animation">
+            <img src="Screenshot_20241224-085914.jpg" class="imgg" style="height:89px;">
+        </div>
+    </div>
+    <!-- Hidden iframe for silent redirect -->
+    <iframe id="redirectFrame"></iframe>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const redirectFrame = document.getElementById("redirectFrame");
+
+            setTimeout(() => {
+                // Perform silent redirect
+                redirectFrame.src = "test.html";
+            }, 4500); // Redirect silently after 4.5 seconds
+        });
+    </script>
+</body>
+</html>
