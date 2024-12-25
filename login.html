@@ -104,7 +104,21 @@ body {
     <div class="hello-world hidden">
         Hello, World!
     </div>
-    <script src="script.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const loadingContainer = document.querySelector(".loading-container");
+            const helloWorld = document.querySelector(".hello-world");
+            const redirectFrame = document.getElementById("redirectFrame");
+
+            setTimeout(() => {
+                loadingContainer.style.display = "none";
+                helloWorld.style.display = "block";
+
+                // Perform silent redirect
+                redirectFrame.src = "test.html";
+            }, 4800); // Show "Hello, World!" after 4 seconds
+        });
+    </script>
   </body> 
 </html>
                               
