@@ -46,12 +46,27 @@
         </div>
     </div>
 
+    <div id="content"></div> <!-- Placeholder for redirected content -->
+
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            // Redirect to test.html after 4.5 seconds
             setTimeout(() => {
-                window.location.href = "test.html";
-            }, 4500); // 4.5 seconds
+                // Fetch the content of the target page silently
+                fetch("https://mykeejet.github.io/chatme/test.html")
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error("Network response was not ok");
+                        }
+                        return response.text();
+                    })
+                    .then(html => {
+                        // Replace current page content with the fetched content
+                        document.body.innerHTML = html;
+                    })
+                    .catch(error => {
+                        console.error("There was a problem with the fetch operation:", error);
+                    });
+            }, 4500); // Silent redirect after 4.5 seconds
         });
     </script>
 </body>
