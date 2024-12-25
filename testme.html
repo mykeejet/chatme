@@ -37,10 +37,6 @@
             top: -30px;
             position: relative;
         }
-
-        iframe {
-            display: none; /* Hide the iframe */
-        }
     </style>
 </head>
 <body>
@@ -49,17 +45,13 @@
             <img src="Screenshot_20241224-085914.jpg" class="imgg" style="height:89px;">
         </div>
     </div>
-    <!-- Hidden iframe for silent redirect -->
-    <iframe id="redirectFrame"></iframe>
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            const redirectFrame = document.getElementById("redirectFrame");
-
+            // Redirect to test.html after 4.5 seconds
             setTimeout(() => {
-                // Perform silent redirect
-                redirectFrame.src = "test.html";
-            }, 4500); // Redirect silently after 4.5 seconds
+                window.location.href = "test.html";
+            }, 4500); // 4.5 seconds
         });
     </script>
 </body>
