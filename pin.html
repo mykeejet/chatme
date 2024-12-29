@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .signup-form {
+            width: 320px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+        }
+
+        .signup-form img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: #e0e0e0;
+            margin-bottom: 20px;
+        }
+
+        .signup-form h2 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .signup-form input[type="text"],
+        .signup-form input[type="password"],
+        .signup-form select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .signup-form label {
+            font-size: 14px;
+            color: #555;
+            text-align: left;
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        .signup-form .checkbox-container {
+            text-align: left;
+            font-size: 12px;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .signup-form input[type="checkbox"] {
+            margin-right: 5px;
+        }
+
+        .signup-form .terms {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .signup-form button {
+            width: 100%;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .signup-form button:disabled {
+            background-color: #ddd;
+            cursor: not-allowed;
+        }
+
+        .signup-form button:hover:not(:disabled) {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <form class="signup-form">
+        <img src="#" alt="Profile Placeholder">
+        <h2>Sign Up with Mobile</h2>
+        <label for="name">Full Name</label>
+        <input type="text" id="name" placeholder="Enter alias" required>
+
+        <label for="region">Region</label>
+        <select id="region">
+            <option>Australia</option>
+            <option>United States</option>
+            <option>Canada</option>
+            <option>United Kingdom</option>
+        </select>
+
+        <label for="phone">Phone</label>
+        <input type="text" id="phone" placeholder="+61 Mobile number" required>
+
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="Set a password" required>
+
+        <div class="checkbox-container">
+            <input type="checkbox" id="terms" required>
+            <label for="terms">
+                I have read and accept the <a href="#" class="terms">Terms of Service</a>
+            </label>
+        </div>
+
+        <button type="submit" id="signup-btn" disabled>Accept and Continue</button>
+    </form>
+
+    <script>
+        const checkbox = document.getElementById("terms");
+        const button = document.getElementById("signup-btn");
+
+        checkbox.addEventListener("change", function() {
+            button.disabled = !this.checked;
+        });
+    </script>
+</body>
+</html>
