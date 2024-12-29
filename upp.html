@@ -8,7 +8,7 @@
 </head>
 <body>
  <style>
- /* General styles */
+   /* General styles */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -72,6 +72,7 @@ input[type="password"] {
   color: #007bff;
   cursor: pointer;
   font-size: 14px;
+  display: none; /* Hidden by default */
 }
 
 .signup-button {
@@ -121,14 +122,25 @@ input[type="password"] {
     </form>
   </div>
   <script>
-document.getElementById('toggle-password').addEventListener('click', function () {
-  const passwordField = document.getElementById('password');
-  const isPasswordVisible = passwordField.type === 'password';
+    
+const passwordField = document.getElementById('password');
+const togglePasswordButton = document.getElementById('toggle-password');
 
+// Show the "Show/Hide" button when the user starts typing
+passwordField.addEventListener('input', function () {
+  if (this.value.length > 0) {
+    togglePasswordButton.style.display = 'block';
+  } else {
+    togglePasswordButton.style.display = 'none';
+  }
+});
+
+// Toggle password visibility
+togglePasswordButton.addEventListener('click', function () {
+  const isPasswordVisible = passwordField.type === 'password';
   passwordField.type = isPasswordVisible ? 'text' : 'password';
   this.textContent = isPasswordVisible ? 'Hide' : 'Show';
 });
-
 </script>
 </body>
 </html>
