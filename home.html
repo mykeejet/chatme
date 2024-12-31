@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat Interface</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <style>
+    body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-panel {
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.header {
+  background-color: #00aaff;
+  color: #ffffff;
+  padding: 15px;
+  text-align: center;
+  font-size: 18px;
+}
+
+.search-bar {
+  padding: 10px;
+  background-color: #f0f0f0;
+}
+
+.search-bar input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.chat-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.chat-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.chat-item:hover {
+  background-color: #f9f9f9;
+}
+
+.avatar {
+  width: 50px;
+  height: 50px;
+  background-color: #ddd;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.chat-info {
+  flex: 1;
+}
+
+.chat-name {
+  font-weight: bold;
+  margin: 0;
+}
+
+.chat-message {
+  color: #888;
+  font-size: 14px;
+  margin: 0;
+}
+
+.chat-time {
+  font-size: 12px;
+  color: #888;
+}
+
+/* Responsive Design */
+@media (min-width: 768px) {
+  .container {
+    flex-direction: row;
+  }
+
+  .chat-panel {
+    width: 300px;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    margin: 0;
+  }
+}
+  </style>
+  <div class="container">
+    <div class="chat-panel">
+      <div class="header">Chat App</div>
+      <div class="search-bar">
+        <input type="text" placeholder="Search">
+      </div>
+      <ul class="chat-list">
+        <li class="chat-item">
+          <div class="avatar"></div>
+          <div class="chat-info">
+            <p class="chat-name">User Name</p>
+            <p class="chat-message">Last message...</p>
+          </div>
+          <span class="chat-time">12:00</span>
+        </li>
+        <!-- Add more chat items here -->
+      </ul>
+    </div>
+  </div>
+</body>
+</html>
