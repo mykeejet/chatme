@@ -92,6 +92,56 @@
   color: #888;
 }
 
+/* Right-side chat panel */
+.right-panel {
+  display: none;
+  width: 65%;
+  background-color: #ffffff;
+  position: fixed;
+  right: 0;
+  top: 0;
+  height: 100vh;
+  box-shadow: -2px 0 4px rgba(0, 0, 0, 0.1);
+  flex-direction: column;
+}
+
+.right-panel.active {
+  display: flex;
+}
+
+.right-header {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  background-color: #007AFF;
+  color: white;
+}
+
+.back-arrow {
+  cursor: pointer;
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+.messages {
+  flex: 1;
+  padding: 15px;
+  overflow-y: auto;
+}
+
+.input-area {
+  padding: 10px;
+  border-top: 1px solid #ddd;
+}
+
+.input-area input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+/* End of right side */
+
 /* Responsive Design */
 @media (min-width: 768px) {
   .container {
@@ -183,5 +233,39 @@
       </ul>
     </div>
   </div>
+
+  <!-- right side -->
+
+  <div class="right-panel" id="rightPanel">
+  <div class="right-header">
+    <span class="back-arrow" onclick="closeChat()">←</span>
+    <span id="chatTitle">Chat</span>
+  </div>
+  <div class="messages" id="messages">
+    <!-- Messages will appear here -->
+  </div>
+  <div class="input-area">
+    <input type="text" placeholder="Type a message...">
+  </div>
+</div>
+  <!--  End of Right side -->
+<!-- right side bar JavaScript -->
+  <script>
+    function openChat(userName) {
+  document.getElementById('rightPanel').classList.add('active');
+  document.getElementById('chatTitle').textContent = userName;
+}
+
+function closeChat() {
+  document.getElementById('rightPanel').classList.remove('active');
+}
+
+// Attach event listeners to chat items dynamically
+document.querySelectorAll('.chat-item').forEach((item) => {
+  item.addEventListener('click', () => openChat(item.querySelector('.chat-name').textContent));
+});
+
+  </script>
+  
 </body>
 </html>
