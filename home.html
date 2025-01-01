@@ -269,9 +269,12 @@
   <!--  End of Right side -->
 <!-- right side bar JavaScript -->
   <script>
-    function openChat(userName) {
+    function openChat(userName, avatarSrc) {
   document.getElementById('rightPanel').classList.add('active');
   document.getElementById('chatTitle').textContent = userName;
+
+  // Set the avatar image on the right side
+  document.getElementById('rightPanel').querySelector('.right-header img').src = avatarSrc;
 }
 
 function closeChat() {
@@ -280,7 +283,11 @@ function closeChat() {
 
 // Attach event listeners to chat items dynamically
 document.querySelectorAll('.chat-item').forEach((item) => {
-  item.addEventListener('click', () => openChat(item.querySelector('.chat-name').textContent));
+  item.addEventListener('click', () => {
+    const userName = item.querySelector('.chat-name').textContent;
+    const avatarSrc = item.querySelector('.avatar img').src;
+    openChat(userName, avatarSrc);
+  });
 });
 
   </script>
