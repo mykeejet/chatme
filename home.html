@@ -222,55 +222,57 @@
   </style>
 
 <div class="container">
-    <div class="chat-panel">
-      <div class="header">Chat App</div>
-      <div class="search-bar">
-        <input type="text" placeholder="Search">
-      </div>
-      <ul class="chat-list">
-        <li class="chat-item">
-          <div class="avatar"></div>
-          <div class="chat-info">
-            <p class="chat-name">User Name</p>
-            <p class="chat-message">Last message...</p>
-          </div>
-          <span class="chat-time">12:00</span>
-        </li>
-         <li class="chat-item">
-          <div class="avatar"></div>
-          <div class="chat-info">
-            <p class="chat-name">Mykee</p>
-            <p class="chat-message">Last message...</p>
-          </div>
-          <span class="chat-time">12:00</span>
-         </li>
-        <!-- Add more chat items here -->
-      </ul>
+  <div class="chat-panel">
+    <div class="header">Chat App</div>
+    <div class="search-bar">
+      <input type="text" placeholder="Search">
     </div>
+    <ul class="chat-list">
+      <li class="chat-item">
+        <div class="avatar"><img src="path_to_avatar1.jpg" alt="User Name"></div>
+        <div class="chat-info">
+          <p class="chat-name">User Name</p>
+          <p class="chat-message">Last message...</p>
+        </div>
+        <span class="chat-time">12:00</span>
+      </li>
+      <li class="chat-item">
+        <div class="avatar"><img src="path_to_avatar2.jpg" alt="Mykee"></div>
+        <div class="chat-info">
+          <p class="chat-name">Mykee</p>
+          <p class="chat-message">Last message...</p>
+        </div>
+        <span class="chat-time">12:00</span>
+      </li>
+      <!-- Add more chat items here -->
+    </ul>
   </div>
+</div>
 
-  <!-- right side -->
+<!-- right side -->
 <div class="full-rightee">
   <div class="right-panel" id="rightPanel">
-  <div class="right-header">
-    <span class="back-arrow" onclick="closeChat()">←</span>
-    <span id="chatTitle">Chat</span>
-  </div>
-  <div class="messages" id="messages">
-    <!-- Messages will appear here -->
-  </div>
-  <div class="input-area">
-    <input type="text" placeholder="Type a message...">
+    <div class="right-header">
+      <span class="back-arrow" onclick="closeChat()">←</span>
+      <span id="chatTitle">Chat</span>
+    </div>
+    <div class="right-avatar"><img id="rightAvatar" src="" alt="User Avatar"></div>
+    <div class="messages" id="messages">
+      <!-- Messages will appear here -->
+    </div>
+    <div class="input-area">
+      <input type="text" placeholder="Type a message...">
+    </div>
   </div>
 </div>
-</div>
-  
-  <!--  End of Right side -->
-<!-- right side bar JavaScript -->
+
+
+
   <script>
-    function openChat(userName) {
+    function openChat(userName, userAvatar) {
   document.getElementById('rightPanel').classList.add('active');
   document.getElementById('chatTitle').textContent = userName;
+  document.getElementById('rightAvatar').src = userAvatar;  // Update avatar dynamically
 }
 
 function closeChat() {
@@ -279,9 +281,13 @@ function closeChat() {
 
 // Attach event listeners to chat items dynamically
 document.querySelectorAll('.chat-item').forEach((item) => {
-  item.addEventListener('click', () => openChat(item.querySelector('.chat-name').textContent));
+  item.addEventListener('click', () => {
+    const chatName = item.querySelector('.chat-name').textContent;
+    const chatAvatar = item.querySelector('.avatar img').src;
+    openChat(chatName, chatAvatar);
+  });
 });
-
+    
   </script>
   
 </body>
