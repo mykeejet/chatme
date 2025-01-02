@@ -198,7 +198,7 @@ p.\#\$_\& {
   gap: 10px; /* Adds spacing between textarea and button */
   margin-bottom: 56px;
 }
-
+/*
 textarea#messageInput {
     flex: 1;
     border: 1px solid #ccc;
@@ -228,7 +228,64 @@ button {
 button:hover {
   background-color: #0056b3; /* Darker blue on hover */
 }
+*/
+/* General Styling */
+.input-area {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border-top: 1px solid #ccc;
+  background-color: #f9f9f9;
+}
 
+/* Textarea Styling */
+#messageInput {
+  flex: 1;
+  resize: none;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-right: 10px;
+  box-sizing: border-box;
+}
+
+/* Button Styling */
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  color: white;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Responsive Styling */
+@media (max-width: 768px) {
+  .input-area {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  #messageInput {
+    margin-right: 0;
+    margin-bottom: 10px;
+    font-size: 14px;
+  }
+
+  button {
+    font-size: 14px;
+    padding: 10px;
+  }
+}
+    
 
 /* End of right side */
 
