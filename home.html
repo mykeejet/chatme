@@ -169,8 +169,31 @@ p.\#\$_\& {
 }
 
 
+.sticky-textarea {
+            position: fixed;
+            bottom: 10px; /* Slight padding from the bottom */
+            left: 0;
+            right: 0;
+            display: flex;
+            align-items: center;
+            background: #fff;
+            padding: 10px;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+    .sticky-textarea textarea {
+            flex: 1;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            resize: none;
+      }
 
 
+
+
+    
 /* Individual Message Styling */
 .message {
   max-width: 70%; /* Prevents the message from stretching too wide */
@@ -499,7 +522,9 @@ span#chatTitle {
     <div class="messages" id="messages"></div>
 
     <!-- Input Area -->
-    <textarea id="messageInput" placeholder="Write a message"></textarea>
+    <div class="sticky-textarea">
+        <textarea rows="1" placeholder="Type a message..."></textarea>
+    </div>
      <div class="input-message-input is-empty scrollable scrollable-y no-scrollbar" contenteditable="true" dir="auto" tabindex="-1" data-peer-id="777000" style="transition-duration: 0ms; height: 37px;">
       <button onclick="sendMessage()">Send</button>
   </div>
