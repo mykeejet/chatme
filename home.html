@@ -13,6 +13,14 @@
   font-family: Arial, sans-serif;
   background-color: #f9f9f9;
 }
+#rightAvatar {
+    background: none !important;
+    border: none !important;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+}
+    
 
 .container {
   display: flex;
@@ -326,23 +334,39 @@ img#\#profile_picture {
 
   <script>
     function openChat(userName, userAvatar) {
-  document.getElementById('rightPanel').classList.add('active');
-  document.getElementById('chatTitle').textContent = userName;
-  document.getElementById('rightAvatar').src = userAvatar;  // Update avatar dynamically
+    // Open the chat panel and update the title
+    document.getElementById('rightPanel').classList.add('active');
+    document.getElementById('chatTitle').textContent = userName;
+
+    // Dynamically update the avatar
+    const avatar = document.getElementById('rightAvatar');
+    avatar.src = userAvatar;
+
+    // Force styles to apply dynamically
+    avatar.style.setProperty('background', 'none', 'important'); // Remove any background
+    avatar.style.setProperty('border', 'none', 'important'); // Remove any borders
+    avatar.style.setProperty('border-radius', '50%', 'important'); // Ensure circular avatar
+    avatar.style.setProperty('width', '50px', 'important'); // Adjust width
+    avatar.style.setProperty('height', '50px', 'important'); // Adjust height
 }
 
 function closeChat() {
-  document.getElementById('rightPanel').classList.remove('active');
+    // Close the chat panel
+    document.getElementById('rightPanel').classList.remove('active');
 }
 
 // Attach event listeners to chat items dynamically
 document.querySelectorAll('.chat-item').forEach((item) => {
-  item.addEventListener('click', () => {
-    const chatName = item.querySelector('.chat-name').textContent;
-    const chatAvatar = item.querySelector('.avatar img').src;
-    openChat(chatName, chatAvatar);
-  });
+    item.addEventListener('click', () => {
+        // Get the chat name and avatar source from the clicked item
+        const chatName = item.querySelector('.chat-name').textContent;
+        const chatAvatar = item.querySelector('.avatar img').src;
+
+        // Open the chat with the retrieved details
+        openChat(chatName, chatAvatar);
+    });
 });
+
     
   </script>
   
