@@ -308,27 +308,27 @@ img#\#profile_picture {
         </div>
         <span class="chat-time">12:00</span>
       </li>
-      <!-- Add more chat items here -->
-    </ul>
+      </ul>
   </div>
 </div>
 
-<!-- Right side -->
 <div class="full-right">
   <div class="right-panel" id="rightPanel">
     <div class="right-header">
       <span class="back-arrow" onclick="closeChat()">←</span>
       <span id="chatTitle"></span>
     </div>
-    <div class="right-avatar"><img id="rightAvatar" src="" alt="User Avatar"></div>
-    <div class="messages" id="messages">
-      <!-- Messages will appear here -->
+    <div class="right-avatar">
+      <img id="rightAvatar" src="path/to/default_avatar.jpg" alt="User Avatar" class="right-avatar-img">
     </div>
+    <div class="messages" id="messages">
+      </div>
     <div class="input-area">
       <input type="text" placeholder="Type a message...">
     </div>
   </div>
 </div>
+
 
 <script>
 function openChat(userName, userAvatar) {
@@ -336,10 +336,11 @@ function openChat(userName, userAvatar) {
     document.getElementById('rightPanel').classList.add('active');
     document.getElementById('chatTitle').textContent = userName;
 
-    // Update the avatar directly
-    const avatar = document.getElementById('rightAvatar');
-    avatar.src = userAvatar;
-    avatar.style.cssText = ''; // Reset any existing styles and ensure no unwanted styles are applied
+    // Update the avatar directly using the class selector (optional)
+    const avatar = document.querySelector('.right-avatar-img');
+    if (avatar) { // Check if element exists before updating
+        avatar.src = userAvatar;
+    }
 }
 
 function closeChat() {
@@ -358,6 +359,7 @@ document.querySelectorAll('.chat-item').forEach((item) => {
         openChat(chatName, chatAvatar);
     });
 });
+
 </script>
 
   
