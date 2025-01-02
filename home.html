@@ -149,29 +149,79 @@ p.\#\$_\& {
 }
 
 .messages {
-    flex: 1;
-    padding: 15px;
-    overflow-y: auto;
-    background-image: linear-gradient(to right, rgb(131 181 234 / 70%), rgba(160, 193, 244, 0.7)), 
-    url(Screenshot_20241216-180458.jpg);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-blend-mode: multiply;
+  flex: 1; /* Ensures the chat area takes up all available vertical space */
+  padding: 15px; /* Adds padding around the messages */
+  overflow-y: auto; /* Enables scrolling for older messages */
+  background-image: linear-gradient(to right, rgba(131, 181, 234, 0.7), rgba(160, 193, 244, 0.7)), 
+    url(Screenshot_20241216-180458.jpg); /* Gradient overlay with background image */
+  background-size: cover; /* Ensures the image covers the entire area */
+  background-position: center; /* Centers the background image */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+  background-blend-mode: multiply; /* Blends the gradient with the image */
+  display: flex; /* Makes it flexible for messages to stack vertically */
+  flex-direction: column; /* Stacks messages vertically */
+  gap: 10px; /* Adds space between messages */
 }
 
+
+
+
+/* Individual Message Styling */
+.message {
+  max-width: 70%; /* Prevents the message from stretching too wide */
+  padding: 10px; /* Adds spacing inside the message bubble */
+  border-radius: 15px; /* Rounds the corners of the message bubble */
+  font-size: 14px; /* Sets a readable font size */
+  word-wrap: break-word; /* Ensures long text breaks onto a new line */
+  backdrop-filter: blur(10px); /* Optional: adds a frosted glass effect */
+}
+/* Sent Message Styling */
+.message.sent {
+  align-self: flex-end; /* Aligns sent messages to the right */
+  background-color: rgba(220, 248, 198, 0.8); /* Light green with some transparency */
+  color: #000; /* Dark text for readability */
+}
+
+/* Received Message Styling */
+.message.received {
+  align-self: flex-start; /* Aligns received messages to the left */
+  background-color: rgba(233, 233, 235, 0.8); /* Light gray with transparency */
+  color: #000; /* Dark text for readability */
+}
 
 .input-area {
-  padding: 10px;
-  border-top: 1px solid #ddd;
+  display: flex; /* Aligns textarea and button side by side */
+  align-items: center; /* Centers items vertically */
+  padding: 10px; /* Adds padding around the input area */
+  border-top: 1px solid #ccc; /* Adds a subtle border above */
+  background-color: #fff; /* Keeps input area clean and simple */
+  gap: 10px; /* Adds spacing between textarea and button */
 }
 
-.input-area input {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+textarea#messageInput {
+  flex: 1; /* Allows textarea to take up available space */
+  border: 1px solid #ccc; /* Adds a border around textarea */
+  border-radius: 20px; /* Rounds the edges of the textarea */
+  padding: 10px; /* Adds padding inside */
+  resize: none; /* Prevents resizing */
+  font-size: 14px; /* Sets a comfortable font size */
 }
+
+button {
+  padding: 10px 15px; /* Adds padding to the button */
+  border: none; /* Removes default border */
+  border-radius: 20px; /* Rounds button edges */
+  background-color: #007bff; /* Blue background */
+  color: #fff; /* White text */
+  font-size: 14px; /* Sets font size */
+  cursor: pointer; /* Adds pointer cursor */
+}
+
+button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+
 /* End of right side */
 
 /* Responsive Design */
@@ -396,7 +446,22 @@ document.querySelectorAll('.chat-item').forEach((item) => {
 });
 
 </script>
+  
+<script>
+  function sendMessage() {
+  const messages = document.getElementById("messages");
+  const newMessage = document.createElement("div");
+  newMessage.classList.add("message", "sent");
+  newMessage.textContent = document.getElementById("messageInput").value;
+  
+  messages.appendChild(newMessage);
+  document.getElementById("messageInput").value = "";
 
+  // Auto-scroll to the bottom
+  messages.scrollTop = messages.scrollHeight;
+}
+
+</script>
   
 </body>
 </html>
