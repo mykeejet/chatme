@@ -200,13 +200,20 @@ p.\#\$_\& {
 }
 
 textarea#messageInput {
-  flex: 1; /* Allows textarea to take up available space */
-  border: 1px solid #ccc; /* Adds a border around textarea */
-  border-radius: 20px; /* Rounds the edges of the textarea */
-  padding: 10px; /* Adds padding inside */
-  resize: none; /* Prevents resizing */
-  font-size: 14px; /* Sets a comfortable font size */
-}
+    flex: 1;
+    border: 1px solid #ccc;
+    padding: 10px;
+    resize: none;
+    height: auto;
+    top: 8px;
+    margin-top: -14px;
+    min-height: 12px;
+    position: relative;
+    max-height: 19px;
+    font-size: 14px;
+    text-decoration: none;
+    outline: none;
+}    
 
 button {
   padding: 10px 15px; /* Adds padding to the button */
