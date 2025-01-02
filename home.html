@@ -333,21 +333,24 @@ img#\#profile_picture {
 
 
   <script>
-    function openChat(userName, userAvatar) {
-    // Open the chat panel and update the title
+function openChat(userName, userAvatar) {
+    // Open the chat panel and set the title
     document.getElementById('rightPanel').classList.add('active');
     document.getElementById('chatTitle').textContent = userName;
 
-    // Dynamically update the avatar
+    // Update the avatar dynamically and force styles
     const avatar = document.getElementById('rightAvatar');
     avatar.src = userAvatar;
 
-    // Force styles to apply dynamically
-    avatar.style.setProperty('background', 'none', 'important'); // Remove any background
-    avatar.style.setProperty('border', 'none', 'important'); // Remove any borders
-    avatar.style.setProperty('border-radius', '50%', 'important'); // Ensure circular avatar
-    avatar.style.setProperty('width', '50px', 'important'); // Adjust width
-    avatar.style.setProperty('height', '50px', 'important'); // Adjust height
+    // Remove existing background, border, and apply forced styles
+    avatar.style.cssText = `
+        background: none !important;
+        border: none !important;
+        border-radius: 50% !important;
+        width: 50px !important;
+        height: 50px !important;
+        object-fit: cover !important; /* Ensure image fits within circular bounds */
+    `;
 }
 
 function closeChat() {
@@ -366,6 +369,7 @@ document.querySelectorAll('.chat-item').forEach((item) => {
         openChat(chatName, chatAvatar);
     });
 });
+
 
     
   </script>
