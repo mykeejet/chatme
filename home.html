@@ -336,17 +336,9 @@ function openChat(userName, userAvatar) {
     document.getElementById('rightPanel').classList.add('active');
     document.getElementById('chatTitle').textContent = userName;
 
-    // Update the avatar dynamically
+    // Update the avatar directly
     const avatar = document.getElementById('rightAvatar');
     avatar.src = userAvatar;
-
-    // Clear unwanted background styles
-    avatar.style.background = 'none';
-    avatar.style.border = 'none';
-    avatar.style.borderRadius = '50%';
-    avatar.style.width = '50px';
-    avatar.style.height = '50px';
-    avatar.style.objectFit = 'cover'; // Ensure image fits within circular bounds
 }
 
 function closeChat() {
