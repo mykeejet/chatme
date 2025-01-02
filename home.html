@@ -339,6 +339,7 @@ function openChat(userName, userAvatar) {
     // Update the avatar directly
     const avatar = document.getElementById('rightAvatar');
     avatar.src = userAvatar;
+    avatar.style.cssText = ''; // Reset any existing styles and ensure no unwanted styles are applied
 }
 
 function closeChat() {
@@ -358,6 +359,7 @@ document.querySelectorAll('.chat-item').forEach((item) => {
     });
 });
 </script>
+
   
 </body>
 </html>
