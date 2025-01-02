@@ -286,8 +286,8 @@ img#\#profile_picture {
 
 <div class="container">
   <div class="chat-panel">
-    <div class="header"><p class="#$_&">Messages</p></div>
-    <img src="Screenshot_20250101-225350.jpg" id="#profile_picture" alt="Profile Picture">
+    <div class="header"><p class="messages-header">Messages</p></div>
+    <img src="Screenshot_20250101-225350.jpg" id="profilePicture" alt="Profile Picture">
     <div class="search-bar">
       <input type="text" placeholder="Search">
     </div>
@@ -301,7 +301,7 @@ img#\#profile_picture {
         <span class="chat-time">12:00</span>
       </li>
       <li class="chat-item">
-        <div class="avatar"><img src="path_to_avatar2.jpg" class="ttainer" alt="Mykee"></div>
+        <div class="avatar"><img src="path_to_avatar2.jpg" alt="Mykee"></div>
         <div class="chat-info">
           <p class="chat-name">Mykee</p>
           <p class="chat-message">Last message...</p>
@@ -313,8 +313,8 @@ img#\#profile_picture {
   </div>
 </div>
 
-<!-- right side -->
-<div class="full-rightee">
+<!-- Right side -->
+<div class="full-right">
   <div class="right-panel" id="rightPanel">
     <div class="right-header">
       <span class="back-arrow" onclick="closeChat()">←</span>
@@ -330,27 +330,23 @@ img#\#profile_picture {
   </div>
 </div>
 
-
-
-  <script>
+<script>
 function openChat(userName, userAvatar) {
     // Open the chat panel and set the title
     document.getElementById('rightPanel').classList.add('active');
     document.getElementById('chatTitle').textContent = userName;
 
-    // Update the avatar dynamically and force styles
+    // Update the avatar dynamically
     const avatar = document.getElementById('rightAvatar');
     avatar.src = userAvatar;
 
-    // Remove existing background, border, and apply forced styles
-    avatar.style.cssText = `
-        background: none !important;
-        border: none !important;
-        border-radius: 50% !important;
-        width: 50px !important;
-        height: 50px !important;
-        object-fit: cover !important; /* Ensure image fits within circular bounds */
-    `;
+    // Clear unwanted background styles
+    avatar.style.background = 'none';
+    avatar.style.border = 'none';
+    avatar.style.borderRadius = '50%';
+    avatar.style.width = '50px';
+    avatar.style.height = '50px';
+    avatar.style.objectFit = 'cover'; // Ensure image fits within circular bounds
 }
 
 function closeChat() {
@@ -369,10 +365,7 @@ document.querySelectorAll('.chat-item').forEach((item) => {
         openChat(chatName, chatAvatar);
     });
 });
-
-
-    
-  </script>
+</script>
   
 </body>
 </html>
