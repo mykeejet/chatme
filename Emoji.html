@@ -6,78 +6,77 @@
     <link rel="apple-touch-icon" href="icon.png"> <!-- iOS App Icon -->
     <title>Web version of WeinG</title>
     <style>
-    *{
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-    /* Emoji Button */
-.emoji-button {
-    background: none;
-    border: none;
-    font-size: 24px;
-    margin-left: 10px;
-    cursor: pointer;
-    outline: none;
-}
-.sticky-textarea {
-    position: fixed;
-    bottom: 10px;
-    left: 0;
-    right: 0;
-    display: flex;
-    align-items: center;
-    background: #fff;
-    padding: 10px;
-    margin-bottom: -12px;
-    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-.sticky-textarea textarea {
-    flex: 1;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    resize: none;
-}
-/* Emoji Picker (Dropdown) */
-.emoji-picker {
-    position: absolute;
-    bottom: 60px; /* Adjust this value based on your layout */
-    left: 10px;
-    right: 10px;
-    background: #fff;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    padding: 10px;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 10px;
-    z-index: 1000;
-}
+        /* Emoji Button */
+        .emoji-button {
+            background: none;
+            border: none;
+            font-size: 24px;
+            margin-left: 10px;
+            cursor: pointer;
+            outline: none;
+        }
 
-.hidden {
-    display: none;
-}
+        .sticky-textarea {
+            position: fixed;
+            bottom: 10px;
+            left: 0;
+            right: 0;
+            display: flex;
+            align-items: center;
+            background: #fff;
+            padding: 10px;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+        }
 
-.emoji-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-}
+        .sticky-textarea textarea {
+            flex: 1;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            resize: none;
+        }
 
-.emoji-grid span {
-    font-size: 24px;
-    cursor: pointer;
-    transition: transform 0.2s;
-}
+        /* Emoji Picker (Drop-down) */
+        .emoji-picker {
+            position: absolute;
+            bottom: 100%; /* Push upwards relative to sticky textarea */
+            left: 10px;
+            width: calc(100% - 20px); /* Adjust width based on textarea width */
+            background: #fff;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            display: none; /* Hidden by default */
+            z-index: 1000;
+        }
 
-.emoji-grid span:hover {
-    transform: scale(1.2);
-}        
+        .hidden {
+            display: none;
+        }
+
+        .emoji-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .emoji-grid span {
+            font-size: 24px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .emoji-grid span:hover {
+            transform: scale(1.2);
+        }
     </style>
 </head>
 <body>
@@ -86,6 +85,7 @@
     <textarea rows="1" placeholder="Type a message..."></textarea>
     <button id="emoji-toggle" class="emoji-button">😊</button>
 </div>
+
 <div id="emoji-picker" class="emoji-picker hidden">
     <div class="emoji-grid">
         <!-- Emojis -->
@@ -104,32 +104,33 @@
         <!-- Add more emojis as needed -->
     </div>
 </div>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-    const emojiToggle = document.getElementById('emoji-toggle');
-    const emojiPicker = document.getElementById('emoji-picker');
-    const textarea = document.querySelector('.sticky-textarea textarea');
 
-    // Toggle emoji picker visibility
-    emojiToggle.addEventListener('click', () => {
-        emojiPicker.classList.toggle('hidden');
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const emojiToggle = document.getElementById('emoji-toggle');
+        const emojiPicker = document.getElementById('emoji-picker');
+        const textarea = document.querySelector('.sticky-textarea textarea');
+
+        // Toggle emoji picker visibility
+        emojiToggle.addEventListener('click', () => {
+            emojiPicker.classList.toggle('hidden');
+        });
+
+        // Insert emoji into textarea
+        emojiPicker.addEventListener('click', (event) => {
+            if (event.target.tagName === 'SPAN') {
+                textarea.value += event.target.textContent;
+            }
+        });
+
+        // Close emoji picker when clicking outside
+        document.addEventListener('click', (event) => {
+            if (!emojiPicker.contains(event.target) && event.target !== emojiToggle) {
+                emojiPicker.classList.add('hidden');
+            }
+        });
     });
+</script>
 
-    // Insert emoji into textarea
-    emojiPicker.addEventListener('click', (event) => {
-        if (event.target.tagName === 'SPAN') {
-            textarea.value += event.target.textContent;
-        }
-    });
-
-    // Close emoji picker when clicking outside
-    document.addEventListener('click', (event) => {
-        if (!emojiPicker.contains(event.target) && event.target !== emojiToggle) {
-            emojiPicker.classList.add('hidden');
-        }
-    });
-});
-
-    </script>
 </body>
 </html>
