@@ -23,7 +23,8 @@
 
         .sticky-textarea {
             position: fixed;
-            bottom: 260px;
+            top: auto;
+            bottom: 10px;
             left: 0;
             right: 0;
             display: flex;
@@ -31,7 +32,7 @@
             background: #fff;
             padding: 10px;
             box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
-            transition: bottom 0.3s ease;
+            transition: top 0.3s ease, bottom 0.3s ease;
         }
 
         .sticky-textarea textarea {
@@ -45,7 +46,10 @@
 
         /* Emoji Picker */
         .emoji-picker {
-            position: absolute;
+            position: fixed;
+            bottom: 60px;
+            left: 0;
+            right: 0;
             background: #fff;
             border: 1px solid #ccc;
             border-radius: 10px;
@@ -109,20 +113,13 @@
             // Prevent the click from closing the picker
             event.stopPropagation();
 
-            // Get the position of the text area container
-            const rect = textareaContainer.getBoundingClientRect();
-
-            // Position the emoji picker directly below the text area
-            emojiPicker.style.top = `${rect.top + rect.height + window.scrollY}px`;
-            emojiPicker.style.left = `${rect.left}px`;
-            emojiPicker.style.width = `${rect.width}px`;
-
-            // Toggle visibility
+            // Toggle emoji picker visibility
             const isPickerVisible = emojiPicker.style.display === 'block';
             emojiPicker.style.display = isPickerVisible ? 'none' : 'block';
 
-            // Adjust text area position
-            textareaContainer.style.bottom = isPickerVisible ? '10px' : '100px';
+            // Push the textarea container up when the emoji picker is visible
+            textareaContainer.style.top = isPickerVisible ? 'auto' : '600px';
+            textareaContainer.style.bottom = isPickerVisible ? '10px' : 'auto';
         });
 
         // Insert emoji into textarea
@@ -135,6 +132,7 @@
         // Close emoji picker when clicking outside
         document.addEventListener('click', () => {
             emojiPicker.style.display = 'none';
+            textareaContainer.style.top = 'auto';
             textareaContainer.style.bottom = '10px'; // Reset position
         });
     });
