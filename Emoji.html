@@ -107,17 +107,18 @@
         const textareaContainer = document.getElementById('textarea-container');
         const textarea = document.querySelector('.sticky-textarea textarea');
 
-        // Toggle emoji picker visibility and push textarea up
+        let isKeyboardOpen = false;
+
+        // Toggle emoji picker visibility and update textarea position
         emojiToggle.addEventListener('click', (event) => {
             event.stopPropagation();
 
-            // Toggle emoji picker visibility
             if (emojiPicker.style.display === 'block') {
                 emojiPicker.style.display = 'none';
-                textareaContainer.style.transform = 'translateY(-8px)'; // Reset position
+                updateTransform(); // Reset position
             } else {
                 emojiPicker.style.display = 'block';
-                textareaContainer.style.transform = 'translateY(-181px)'; // Push up slightly
+                updateTransform(); // Adjust position
             }
         });
 
@@ -131,7 +132,7 @@
         // Close emoji picker when clicking outside
         document.addEventListener('click', () => {
             emojiPicker.style.display = 'none';
-            textareaContainer.style.transform = 'translateY(0)'; // Reset position
+            updateTransform(); // Reset position
         });
 
         // Prevent textarea focus from closing emoji picker
@@ -141,13 +142,20 @@
 
         // Adjust for keyboard visibility
         window.addEventListener('resize', () => {
-            if (window.innerHeight < screen.height) { // Keyboard is open
-                textareaContainer.style.transform = 'translateY(4px)'; // Slight adjustment
-                emojiPicker.style.display = 'none'; // Hide emoji picker when keyboard is visible
-            } else {
-                textareaContainer.style.transform = 'translateY(0)'; // Reset when keyboard is closed
-            }
+            isKeyboardOpen = window.innerHeight < screen.height;
+            updateTransform();
         });
+
+        // Update transform based on emoji picker and keyboard state
+        function updateTransform() {
+            if (isKeyboardOpen) {
+                textareaContainer.style.transform = 'translateY(-30px)'; // Adjust for keyboard
+            } else if (emojiPicker.style.display === 'block') {
+                textareaContainer.style.transform = 'translateY(-181px)'; // Adjust for emoji picker
+            } else {
+                textareaContainer.style.transform = 'translateY(0)'; // Default position
+            }
+        }
     });
 </script>
 
