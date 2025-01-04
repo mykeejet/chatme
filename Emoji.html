@@ -23,7 +23,7 @@
 
         .sticky-textarea {
             position: fixed;
-            bottom: 10px; /* Default position */
+            bottom: 10px;
             left: 0;
             right: 0;
             display: flex;
@@ -46,7 +46,7 @@
         /* Emoji Picker */
         .emoji-picker {
             position: fixed;
-            bottom: 60px; /* Default position */
+            bottom: -100%; /* Hidden by default */
             left: 0;
             right: 0;
             background: #fff;
@@ -73,6 +73,13 @@
 
         .emoji-grid span:hover {
             transform: scale(1.2);
+        }
+
+        /* Media Query for Desktop */
+        @media (min-width: 1024px) {
+            .emoji-picker {
+                bottom: auto; /* Reset bottom for desktop */
+            }
         }
     </style>
 </head>
@@ -106,30 +113,31 @@
         const emojiToggle = document.getElementById('emoji-toggle');
         const emojiPicker = document.getElementById('emoji-picker');
         const textareaContainer = document.getElementById('textarea-container');
-        const textarea = document.querySelector('.sticky-textarea textarea');
 
         // Toggle emoji picker visibility
         emojiToggle.addEventListener('click', (event) => {
+            // Prevent the click from closing the picker
             event.stopPropagation();
 
+            // Toggle visibility
             const isVisible = emojiPicker.style.display === 'block';
+            emojiPicker.style.display = isVisible ? 'none' : 'block';
 
             if (!isVisible) {
-                // Emoji picker becomes visible and positions update
-                emojiPicker.style.display = 'block';
-                textareaContainer.style.bottom = '385px'; // Move textarea up
-                emojiPicker.style.bottom = '447px'; // Move emoji picker up
+                // Show picker and adjust positions
+                emojiPicker.style.bottom = '134px';
+                textareaContainer.style.bottom = '215px';
             } else {
-                // Reset to default
-                emojiPicker.style.display = 'none';
-                textareaContainer.style.bottom = '10px'; // Reset textarea position
-                emojiPicker.style.bottom = '60px'; // Reset emoji picker position
+                // Hide picker and reset positions
+                emojiPicker.style.bottom = '-100%';
+                textareaContainer.style.bottom = '10px';
             }
         });
 
         // Insert emoji into textarea
         emojiPicker.addEventListener('click', (event) => {
             if (event.target.tagName === 'SPAN') {
+                const textarea = document.querySelector('.sticky-textarea textarea');
                 textarea.value += event.target.textContent;
             }
         });
@@ -137,8 +145,8 @@
         // Close emoji picker when clicking outside
         document.addEventListener('click', () => {
             emojiPicker.style.display = 'none';
-            textareaContainer.style.bottom = '10px'; // Reset textarea position
-            emojiPicker.style.bottom = '60px'; // Reset emoji picker position
+            emojiPicker.style.bottom = '-100%';
+            textareaContainer.style.bottom = '10px';
         });
     });
 </script>
