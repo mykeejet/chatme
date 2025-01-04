@@ -117,7 +117,7 @@
                 textareaContainer.style.transform = 'translateY(0)'; // Reset position
             } else {
                 emojiPicker.style.display = 'block';
-                textareaContainer.style.transform = 'translateY(-100px)'; // Push up for emoji picker
+                textareaContainer.style.transform = 'translateY(-50px)'; // Push up slightly
             }
         });
 
@@ -142,7 +142,7 @@
         // Adjust for keyboard visibility
         window.addEventListener('resize', () => {
             if (window.innerHeight < screen.height) { // Keyboard is open
-                textareaContainer.style.transform = 'translateY(-50px)'; // Slight adjustment
+                textareaContainer.style.transform = 'translateY(-30px)'; // Slight adjustment
                 emojiPicker.style.display = 'none'; // Hide emoji picker when keyboard is visible
             } else {
                 textareaContainer.style.transform = 'translateY(0)'; // Reset when keyboard is closed
