@@ -142,7 +142,7 @@
         // Adjust for keyboard visibility
         window.addEventListener('resize', () => {
             if (window.innerHeight < screen.height) { // Keyboard is open
-                textareaContainer.style.transform = 'translateY(-30px)'; // Slight adjustment
+                textareaContainer.style.transform = 'translateY(4px)'; // Slight adjustment
                 emojiPicker.style.display = 'none'; // Hide emoji picker when keyboard is visible
             } else {
                 textareaContainer.style.transform = 'translateY(0)'; // Reset when keyboard is closed
