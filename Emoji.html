@@ -33,6 +33,7 @@
             padding: 10px;
             box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
             transition: top 0.3s ease, bottom 0.3s ease;
+            top: 385px;  /* Sticky area set to 385px */
         }
 
         .sticky-textarea textarea {
@@ -54,6 +55,7 @@
             padding: 10px;
             display: none; /* Hidden by default */
             z-index: 1000;
+            top: 447px;  /* Sticky mobile position for emoji picker */
         }
 
         .emoji-grid {
@@ -76,6 +78,7 @@
         @media (min-width: 1024px) {
             .emoji-picker {
                 bottom: auto; /* Reset bottom */
+                top: 60px;  /* Fixed position for desktop */
             }
         }
     </style>
@@ -141,7 +144,7 @@
 
             // Push textarea container up if emoji picker is visible (mobile only)
             if (!isDesktop) {
-                textareaContainer.style.top = emojiPicker.style.display === 'block' ? '600px' : 'auto';
+                textareaContainer.style.top = emojiPicker.style.display === 'block' ? '385px' : 'auto';
                 textareaContainer.style.bottom = emojiPicker.style.display === 'block' ? 'auto' : '10px';
             }
         });
