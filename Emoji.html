@@ -46,10 +46,7 @@
 
         /* Emoji Picker */
         .emoji-picker {
-            position: fixed;
-            bottom: 60px;
-            left: 0;
-            right: 0;
+            position: absolute;
             background: #fff;
             border: 1px solid #ccc;
             border-radius: 10px;
@@ -73,6 +70,13 @@
 
         .emoji-grid span:hover {
             transform: scale(1.2);
+        }
+
+        /* Media Query for Desktop */
+        @media (min-width: 1024px) {
+            .emoji-picker {
+                bottom: auto; /* Reset bottom */
+            }
         }
     </style>
 </head>
@@ -113,13 +117,33 @@
             // Prevent the click from closing the picker
             event.stopPropagation();
 
-            // Toggle emoji picker visibility
-            const isPickerVisible = emojiPicker.style.display === 'block';
-            emojiPicker.style.display = isPickerVisible ? 'none' : 'block';
+            // Determine if desktop or mobile
+            const isDesktop = window.innerWidth >= 1024;
 
-            // Push the textarea container up when the emoji picker is visible
-            textareaContainer.style.top = isPickerVisible ? 'auto' : '600px';
-            textareaContainer.style.bottom = isPickerVisible ? '10px' : 'auto';
+            // Get the position of the text area container
+            const rect = textareaContainer.getBoundingClientRect();
+
+            if (isDesktop) {
+                // Emoji picker pops up above for desktop
+                emojiPicker.style.top = `${rect.top - emojiPicker.offsetHeight + window.scrollY}px`;
+                emojiPicker.style.left = `${rect.left}px`;
+            } else {
+                // Emoji picker pops down below for mobile
+                emojiPicker.style.top = `${rect.top + rect.height + window.scrollY}px`;
+                emojiPicker.style.left = `${rect.left}px`;
+            }
+
+            // Adjust width to match the textarea
+            emojiPicker.style.width = `${rect.width}px`;
+
+            // Toggle visibility
+            emojiPicker.style.display = (emojiPicker.style.display === 'block') ? 'none' : 'block';
+
+            // Push textarea container up if emoji picker is visible (mobile only)
+            if (!isDesktop) {
+                textareaContainer.style.top = emojiPicker.style.display === 'block' ? '600px' : 'auto';
+                textareaContainer.style.bottom = emojiPicker.style.display === 'block' ? 'auto' : '10px';
+            }
         });
 
         // Insert emoji into textarea
@@ -133,7 +157,7 @@
         document.addEventListener('click', () => {
             emojiPicker.style.display = 'none';
             textareaContainer.style.top = 'auto';
-            textareaContainer.style.bottom = '10px'; // Reset position
+            textareaContainer.style.bottom = '10px'; // Reset position for mobile
         });
     });
 </script>
