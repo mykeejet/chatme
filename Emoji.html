@@ -23,8 +23,7 @@
 
         .sticky-textarea {
             position: fixed;
-            top: auto;
-            bottom: 10px;
+            bottom: 10px; /* Default position */
             left: 0;
             right: 0;
             display: flex;
@@ -32,8 +31,7 @@
             background: #fff;
             padding: 10px;
             box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
-            transition: top 0.3s ease, bottom 0.3s ease;
-            top: 385px;  /* Sticky area set to 385px */
+            transition: bottom 0.3s ease;
         }
 
         .sticky-textarea textarea {
@@ -47,7 +45,10 @@
 
         /* Emoji Picker */
         .emoji-picker {
-            position: absolute;
+            position: fixed;
+            bottom: 60px; /* Default position */
+            left: 0;
+            right: 0;
             background: #fff;
             border: 1px solid #ccc;
             border-radius: 10px;
@@ -55,7 +56,7 @@
             padding: 10px;
             display: none; /* Hidden by default */
             z-index: 1000;
-            top: 447px;  /* Sticky mobile position for emoji picker */
+            transition: bottom 0.3s ease;
         }
 
         .emoji-grid {
@@ -72,14 +73,6 @@
 
         .emoji-grid span:hover {
             transform: scale(1.2);
-        }
-
-        /* Media Query for Desktop */
-        @media (min-width: 1024px) {
-            .emoji-picker {
-                bottom: auto; /* Reset bottom */
-                top: 60px;  /* Fixed position for desktop */
-            }
         }
     </style>
 </head>
@@ -117,35 +110,20 @@
 
         // Toggle emoji picker visibility
         emojiToggle.addEventListener('click', (event) => {
-            // Prevent the click from closing the picker
             event.stopPropagation();
 
-            // Determine if desktop or mobile
-            const isDesktop = window.innerWidth >= 1024;
+            const isVisible = emojiPicker.style.display === 'block';
 
-            // Get the position of the text area container
-            const rect = textareaContainer.getBoundingClientRect();
-
-            if (isDesktop) {
-                // Emoji picker pops up above for desktop
-                emojiPicker.style.top = `${rect.top - emojiPicker.offsetHeight + window.scrollY}px`;
-                emojiPicker.style.left = `${rect.left}px`;
+            if (!isVisible) {
+                // Emoji picker becomes visible and positions update
+                emojiPicker.style.display = 'block';
+                textareaContainer.style.bottom = '385px'; // Move textarea up
+                emojiPicker.style.bottom = '447px'; // Move emoji picker up
             } else {
-                // Emoji picker pops down below for mobile
-                emojiPicker.style.top = `${rect.top + rect.height + window.scrollY}px`;
-                emojiPicker.style.left = `${rect.left}px`;
-            }
-
-            // Adjust width to match the textarea
-            emojiPicker.style.width = `${rect.width}px`;
-
-            // Toggle visibility
-            emojiPicker.style.display = (emojiPicker.style.display === 'block') ? 'none' : 'block';
-
-            // Push textarea container up if emoji picker is visible (mobile only)
-            if (!isDesktop) {
-                textareaContainer.style.top = emojiPicker.style.display === 'block' ? '385px' : 'auto';
-                textareaContainer.style.bottom = emojiPicker.style.display === 'block' ? 'auto' : '10px';
+                // Reset to default
+                emojiPicker.style.display = 'none';
+                textareaContainer.style.bottom = '10px'; // Reset textarea position
+                emojiPicker.style.bottom = '60px'; // Reset emoji picker position
             }
         });
 
@@ -159,8 +137,8 @@
         // Close emoji picker when clicking outside
         document.addEventListener('click', () => {
             emojiPicker.style.display = 'none';
-            textareaContainer.style.top = 'auto';
-            textareaContainer.style.bottom = '10px'; // Reset position for mobile
+            textareaContainer.style.bottom = '10px'; // Reset textarea position
+            emojiPicker.style.bottom = '60px'; // Reset emoji picker position
         });
     });
 </script>
