@@ -118,6 +118,7 @@
                 updateTransform(); // Reset position
             } else {
                 emojiPicker.style.display = 'block';
+                textarea.blur(); // Close the keyboard
                 updateTransform(); // Adjust position
             }
         });
@@ -149,11 +150,11 @@
         // Update transform based on emoji picker and keyboard state
         function updateTransform() {
             if (isKeyboardOpen) {
-                textareaContainer.style.transform = 'translateY(-2px)'; // Adjust for keyboard
+                textareaContainer.style.transform = 'translateY(-30px)'; // Adjust for keyboard
             } else if (emojiPicker.style.display === 'block') {
                 textareaContainer.style.transform = 'translateY(-181px)'; // Adjust for emoji picker
             } else {
-                textareaContainer.style.transform = 'translateY(-2)'; // Default position
+                textareaContainer.style.transform = 'translateY(0)'; // Default position
             }
         }
     });
