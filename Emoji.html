@@ -31,6 +31,7 @@
             background: #fff;
             padding: 10px;
             box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+            transition: bottom 0.3s ease;
         }
 
         .sticky-textarea textarea {
@@ -117,7 +118,11 @@
             emojiPicker.style.width = `${rect.width}px`;
 
             // Toggle visibility
-            emojiPicker.style.display = (emojiPicker.style.display === 'block') ? 'none' : 'block';
+            const isPickerVisible = emojiPicker.style.display === 'block';
+            emojiPicker.style.display = isPickerVisible ? 'none' : 'block';
+
+            // Adjust text area position
+            textareaContainer.style.bottom = isPickerVisible ? '10px' : '100px';
         });
 
         // Insert emoji into textarea
@@ -130,6 +135,7 @@
         // Close emoji picker when clicking outside
         document.addEventListener('click', () => {
             emojiPicker.style.display = 'none';
+            textareaContainer.style.bottom = '10px'; // Reset position
         });
     });
 </script>
