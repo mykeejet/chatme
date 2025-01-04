@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Responsive Emoji Picker</title>
+    <title>Web version of WeinG</title>
     <style>
         * {
             margin: 0;
@@ -23,7 +23,7 @@
 
         .sticky-textarea {
             position: fixed;
-            bottom: 0;
+            bottom: 10px;
             left: 0;
             right: 0;
             display: flex;
@@ -31,7 +31,6 @@
             background: #fff;
             padding: 10px;
             box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease; /* Smooth movement */
         }
 
         .sticky-textarea textarea {
@@ -45,10 +44,7 @@
 
         /* Emoji Picker */
         .emoji-picker {
-            position: fixed;
-            bottom: 60px; /* Space to appear under textarea */
-            left: 10px;
-            right: 10px;
+            position: absolute;
             background: #fff;
             border: 1px solid #ccc;
             border-radius: 10px;
@@ -107,20 +103,21 @@
         const textareaContainer = document.getElementById('textarea-container');
         const textarea = document.querySelector('.sticky-textarea textarea');
 
-        let isKeyboardOpen = false;
-
-        // Toggle emoji picker visibility and update textarea position
+        // Toggle emoji picker visibility
         emojiToggle.addEventListener('click', (event) => {
+            // Prevent the click from closing the picker
             event.stopPropagation();
 
-            if (emojiPicker.style.display === 'block') {
-                emojiPicker.style.display = 'none';
-                updateTransform(); // Reset position
-            } else {
-                emojiPicker.style.display = 'block';
-                textarea.blur(); // Close the keyboard
-                updateTransform(); // Adjust position
-            }
+            // Get the position of the text area container
+            const rect = textareaContainer.getBoundingClientRect();
+
+            // Position the emoji picker directly below the text area
+            emojiPicker.style.top = `${rect.top + rect.height + window.scrollY}px`;
+            emojiPicker.style.left = `${rect.left}px`;
+            emojiPicker.style.width = `${rect.width}px`;
+
+            // Toggle visibility
+            emojiPicker.style.display = (emojiPicker.style.display === 'block') ? 'none' : 'block';
         });
 
         // Insert emoji into textarea
@@ -133,30 +130,7 @@
         // Close emoji picker when clicking outside
         document.addEventListener('click', () => {
             emojiPicker.style.display = 'none';
-            updateTransform(); // Reset position
         });
-
-        // Prevent textarea focus from closing emoji picker
-        textarea.addEventListener('click', (event) => {
-            event.stopPropagation();
-        });
-
-        // Adjust for keyboard visibility
-        window.addEventListener('resize', () => {
-            isKeyboardOpen = window.innerHeight < screen.height;
-            updateTransform();
-        });
-
-        // Update transform based on emoji picker and keyboard state
-        function updateTransform() {
-            if (isKeyboardOpen) {
-                textareaContainer.style.transform = 'translateY(-30px)'; // Adjust for keyboard
-            } else if (emojiPicker.style.display === 'block') {
-                textareaContainer.style.transform = 'translateY(-181px)'; // Adjust for emoji picker
-            } else {
-                textareaContainer.style.transform = 'translateY(0)'; // Default position
-            }
-        }
     });
 </script>
 
