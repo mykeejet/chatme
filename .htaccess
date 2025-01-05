@@ -10,3 +10,7 @@ RewriteRule ^(.*)$ $1.php [L]
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}.html -f
 RewriteRule ^(.*)$ $1.html [L]
+
+# Redirect specific extensions with error message
+RewriteRule ^(index)\.(php|html)$ - [R=404,L]
+RewriteRule ^.*\.(php|html)$ - [R=404,L]
