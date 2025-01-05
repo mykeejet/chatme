@@ -261,18 +261,36 @@ const stickyTextarea = document.querySelector('.sticky-textarea');
 
 // Function to adjust the styles
 function adjustEmojiPickerStyles() {
+    const emojiSearchInput = document.getElementById('emoji-search');
+
+    // Ensure the emoji picker is properly referenced
     if (emojiPicker) {
         emojiPicker.style.height = '46%';
         emojiPicker.style.bottom = '-5px';
     }
+
+    // Ensure the sticky-textarea is set correctly
     if (stickyTextarea) {
         stickyTextarea.style.width = '312.7px';
     }
+
+    // Additional check to ensure styles only apply when the emoji search is active
+    if (emojiSearchInput) {
+        emojiSearchInput.addEventListener('focus', () => {
+            emojiPicker.style.height = '46%';
+            emojiPicker.style.bottom = '-5px';
+        });
+
+        emojiSearchInput.addEventListener('blur', () => {
+            emojiPicker.style.height = '';
+            emojiPicker.style.bottom = '';
+        });
+    }
 }
 
-// Call the function whenever needed
+// Call the function to set the initial styles
 adjustEmojiPickerStyles();
-
+        
     </script>
 
 </body>
