@@ -265,5 +265,47 @@
 });
     </script>
 
+
+    
+        <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const emojiToggle = document.getElementById("emoji-toggle");
+        const emojiPicker = document.getElementById("emoji-picker");
+        const emojiSearch = document.getElementById("emoji-search");
+        const emojiGrid = document.querySelector(".emoji-grid");
+
+        // Track if the emoji picker is open
+        let isPickerOpen = false;
+
+        // Toggle the emoji picker
+        emojiToggle.addEventListener("click", () => {
+            isPickerOpen = !isPickerOpen;
+            emojiPicker.style.display = isPickerOpen ? "block" : "none";
+        });
+
+        // Prevent closing when clicking inside the emoji picker
+        emojiPicker.addEventListener("click", (e) => {
+            e.stopPropagation();
+        });
+
+        // Close the emoji picker when clicking outside
+        document.addEventListener("click", (e) => {
+            if (isPickerOpen && !emojiPicker.contains(e.target) && e.target !== emojiToggle) {
+                isPickerOpen = false;
+                emojiPicker.style.display = "none";
+            }
+        });
+
+        // Example action for emoji clicks
+        emojiGrid.addEventListener("click", (e) => {
+            if (e.target.tagName === "SPAN") {
+                const selectedEmoji = e.target.textContent;
+                console.log("Selected emoji:", selectedEmoji);
+                // Do something with the selected emoji
+            }
+        });
+    });
+</script>
+
 </body>
 </html>
