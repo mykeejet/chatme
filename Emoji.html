@@ -254,6 +254,7 @@
         const emojiPicker = document.getElementById("emoji-picker");
         const emojiSearch = document.getElementById("emoji-search");
         const emojiDropdown = document.getElementById("emoji-dropdown");
+        const stickyTextareaContainer = document.querySelector(".sticky-textarea");
 
         // Emoji name and symbol mapping
         const emojiMap = [
@@ -288,6 +289,10 @@
             if (isPickerOpen && !emojiPicker.contains(e.target) && e.target !== emojiToggle) {
                 isPickerOpen = false;
                 emojiPicker.style.display = "none";
+
+                // Push the sticky textarea container to the bottom with a default bottom margin of 10px
+                stickyTextareaContainer.style.position = "relative"; // Ensure the container isn't fixed
+                stickyTextareaContainer.style.bottom = "10px"; // Move to the bottom with a default margin
             }
         });
 
@@ -325,5 +330,6 @@
         });
     });
 </script>
+    
 </body>
 </html>
