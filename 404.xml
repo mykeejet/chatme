@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<error>
+    <code>404</code>
+    <message>Page Not Found</message>
+    <description>Sorry, the page you are looking for does not exist.</description>
+    <link>https://www.yourwebsite.com</link>
+</error>
