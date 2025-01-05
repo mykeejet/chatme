@@ -212,6 +212,7 @@
         const isVisible = emojiPicker.style.bottom === '0px'; // Check visibility based on bottom value
         emojiPicker.style.bottom = isVisible ? '-100%' : '-6px';
         emojiPicker.style.height = isVisible ? '0' : '32%'; // Set height when visible
+        emojiPicker.style.display = isVisible ? 'none' : 'block'; // Ensure picker is shown
         textareaContainer.style.bottom = isVisible ? '10px' : '215px';
     });
 
@@ -227,6 +228,7 @@
     document.addEventListener('click', () => {
         emojiPicker.style.bottom = '-100%';
         emojiPicker.style.height = '0'; // Reset height when hidden
+        emojiPicker.style.display = 'none'; // Ensure picker is hidden
         textareaContainer.style.bottom = '10px';
     });
 });
