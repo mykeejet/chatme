@@ -253,18 +253,7 @@
         const emojiToggle = document.getElementById("emoji-toggle");
         const emojiPicker = document.getElementById("emoji-picker");
         const emojiSearch = document.getElementById("emoji-search");
-
-        // Create a dropdown dynamically for emoji suggestions
-        const emojiDropdown = document.createElement("div");
-        emojiDropdown.id = "emoji-dropdown";
-        emojiDropdown.style.position = "absolute";
-        emojiDropdown.style.background = "#fff";
-        emojiDropdown.style.border = "1px solid #ccc";
-        emojiDropdown.style.borderRadius = "5px";
-        emojiDropdown.style.width = "100%";
-        emojiDropdown.style.zIndex = "10";
-        emojiDropdown.style.display = "none";
-        emojiSearch.parentNode.appendChild(emojiDropdown);
+        const emojiDropdown = document.getElementById("emoji-dropdown");
 
         // Emoji name and symbol mapping
         const emojiMap = [
@@ -304,7 +293,7 @@
 
         // Search for emojis by name or emoji symbol
         emojiSearch.addEventListener("input", () => {
-            const query = emojiSearch.value.trim().toLowerCase();
+            const query = emojiSearch.value.toLowerCase();
             const filteredEmojis = emojiMap.filter(
                 (entry) =>
                     entry.name.includes(query) || entry.emoji.includes(query)
@@ -316,14 +305,14 @@
             if (filteredEmojis.length > 0 && query) {
                 filteredEmojis.forEach((entry) => {
                     const emojiItem = document.createElement("div");
-                    emojiItem.textContent = entry.emoji; // Display only the emoji
+                    emojiItem.textContent = entry.emoji; // Only the emoji is displayed
 
                     emojiItem.style.padding = "5px";
                     emojiItem.style.cursor = "pointer";
 
                     // Add click event to select the emoji
                     emojiItem.addEventListener("click", () => {
-                        emojiSearch.value = entry.emoji; // Display only the emoji in the input
+                        emojiSearch.value = entry.emoji; // Echo the selected emoji in the search bar
                         emojiDropdown.style.display = "none"; // Hide dropdown
                     });
 
@@ -336,7 +325,5 @@
         });
     });
 </script>
-
-
 </body>
 </html>
