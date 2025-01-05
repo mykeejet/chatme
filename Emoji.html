@@ -253,7 +253,16 @@
         const emojiToggle = document.getElementById("emoji-toggle");
         const emojiPicker = document.getElementById("emoji-picker");
         const emojiSearch = document.getElementById("emoji-search");
-        const emojiDropdown = document.getElementById("emoji-dropdown");
+        const emojiDropdown = document.createElement("div"); // Create a dropdown dynamically
+        emojiDropdown.id = "emoji-dropdown";
+        emojiDropdown.style.position = "absolute";
+        emojiDropdown.style.background = "#fff";
+        emojiDropdown.style.border = "1px solid #ccc";
+        emojiDropdown.style.borderRadius = "5px";
+        emojiDropdown.style.width = "100%";
+        emojiDropdown.style.zIndex = "10";
+        emojiDropdown.style.display = "none";
+        emojiSearch.parentNode.appendChild(emojiDropdown);
 
         // Emoji name and symbol mapping
         const emojiMap = [
@@ -305,7 +314,14 @@
             if (filteredEmojis.length > 0 && query) {
                 filteredEmojis.forEach((entry) => {
                     const emojiItem = document.createElement("div");
-                    emojiItem.textContent = `${entry.emoji} (${entry.name})`;
+
+                    // Show only the emoji if the query matches the emoji itself
+                    if (query.includes(entry.emoji)) {
+                        emojiItem.textContent = entry.emoji;
+                    } else {
+                        emojiItem.textContent = `${entry.emoji}`; // Otherwise, show only the emoji
+                    }
+
                     emojiItem.style.padding = "5px";
                     emojiItem.style.cursor = "pointer";
 
