@@ -92,13 +92,13 @@
 </div>
 
 <div id="emoji-picker" class="emoji-picker">
-    <input 
+   <!-- <input 
         type="text" 
         id="emoji-search" 
         placeholder="Search for an emoji..." 
         style="width: 100%; padding: 8px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 5px;"
-    />
-    <div id="emoji-dropdown" class="emoji-dropdown" style="position: absolute; top: 50px; width: 100%; background: white; border: 1px solid #ccc; border-radius: 5px; display: none; max-height: 150px; overflow-y: auto; z-index: 1000;">
+    /> -->
+   <!-- <div id="emoji-dropdown" class="emoji-dropdown" style="position: absolute; top: 50px; width: 100%; background: white; border: 1px solid #ccc; border-radius: 5px; display: none; max-height: 150px; overflow-y: auto; z-index: 1000;"> -->
         <!-- Filtered emoji results will appear here -->
     </div>
     <div id="emoji-category-name" style="font-weight: bold; margin-bottom: 10px; font-size: 16px;">
@@ -332,38 +332,6 @@
 </script>
 
     
-    <script>
-        // Get the relevant elements
-const emojiSearchInput = document.getElementById('emoji-search');
-const stickyTextarea = document.querySelector('.sticky-textarea');
-const messageTextarea = document.querySelector('textarea');
-const emojiButton = document.getElementById('emoji-toggle');
-
-// Function to adjust styles dynamically
-function adjustLayoutForKeyboard() {
-    // Get the height of the visible area
-    const viewportHeight = window.innerHeight;
-    const inputBottomPosition = emojiSearchInput.getBoundingClientRect().bottom;
-
-    // Calculate the new bottom position for the sticky textarea
-    const keyboardHeight = viewportHeight - inputBottomPosition;
-    stickyTextarea.style.bottom = `${keyboardHeight + 50}px`; // Adjust the 50px padding as needed
-    messageTextarea.style.marginTop = '-29px';
-    emojiButton.style.marginTop = '-29px';
-    emojiSearchInput.style.marginLeft = '-2px';
-}
-
-// Add event listener for focus
-emojiSearchInput.addEventListener('focus', adjustLayoutForKeyboard);
-
-// Reset styles when the input loses focus
-emojiSearchInput.addEventListener('blur', () => {
-    stickyTextarea.style.bottom = '0'; // Reset to default
-    messageTextarea.style.marginTop = '';
-    emojiButton.style.marginTop = '';
-    emojiSearchInput.style.marginLeft = '';
-});
-    </script>
 
 </body>
 </html>
