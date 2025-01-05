@@ -1,16 +1,16 @@
 # Enable Rewrite Engine
 RewriteEngine On
 
-# Hide .php extension
+# Block all .php and .html file requests (existing or non-existing)
+RewriteCond %{REQUEST_URI} \.(php|html)$ [NC]
+RewriteRule ^ - [R=404,L]
+
+# Allow clean URLs without extensions for .php files
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}.php -f
 RewriteRule ^(.*)$ $1.php [L]
 
-# Hide .html extension
+# Allow clean URLs without extensions for .html files
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}.html -f
 RewriteRule ^(.*)$ $1.html [L]
-
-# Redirect specific extensions with error message
-RewriteRule ^(index)\.(php|html)$ - [R=404,L]
-RewriteRule ^.*\.(php|html)$ - [R=404,L]
