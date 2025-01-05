@@ -199,46 +199,37 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        const emojiToggle = document.getElementById('emoji-toggle');
-        const emojiPicker = document.getElementById('emoji-picker');
-        const textareaContainer = document.getElementById('textarea-container');
+    const emojiToggle = document.getElementById('emoji-toggle');
+    const emojiPicker = document.getElementById('emoji-picker');
+    const textareaContainer = document.getElementById('textarea-container');
 
-        // Toggle emoji picker visibility
-        emojiToggle.addEventListener('click', (event) => {
-            // Prevent the click from closing the picker
-            event.stopPropagation();
+    // Toggle emoji picker visibility
+    emojiToggle.addEventListener('click', (event) => {
+        // Prevent the click from closing the picker
+        event.stopPropagation();
 
-            // Toggle visibility
-            const isVisible = emojiPicker.style.display === 'block';
-            emojiPicker.style.display = isVisible ? 'none' : 'block';
-
-            if (!isVisible) {
-                // Show picker and adjust positions
-                emojiPicker.style.bottom = '-6px';
-                textareaContainer.style.bottom = '215px';
-            } else {
-                // Hide picker and reset positions
-                emojiPicker.style.bottom = '-100%';
-                emojiPicker.style.height = '32%'; // Set height when visible
-                textareaContainer.style.bottom = '10px';
-            }
-        });
-
-        // Insert emoji into textarea
-        emojiPicker.addEventListener('click', (event) => {
-            if (event.target.tagName === 'SPAN') {
-                const textarea = document.querySelector('.sticky-textarea textarea');
-                textarea.value += event.target.textContent;
-            }
-        });
-
-        // Close emoji picker when clicking outside
-        document.addEventListener('click', () => {
-            emojiPicker.style.display = 'none';
-            emojiPicker.style.bottom = '-100%';
-            textareaContainer.style.bottom = '10px';
-        });
+        // Toggle visibility
+        const isVisible = emojiPicker.style.bottom === '0px'; // Check visibility based on bottom value
+        emojiPicker.style.bottom = isVisible ? '-100%' : '-6px';
+        emojiPicker.style.height = isVisible ? '0' : '32%'; // Set height when visible
+        textareaContainer.style.bottom = isVisible ? '10px' : '215px';
     });
+
+    // Insert emoji into textarea
+    emojiPicker.addEventListener('click', (event) => {
+        if (event.target.tagName === 'SPAN') {
+            const textarea = document.querySelector('.sticky-textarea textarea');
+            textarea.value += event.target.textContent;
+        }
+    });
+
+    // Close emoji picker when clicking outside
+    document.addEventListener('click', () => {
+        emojiPicker.style.bottom = '-100%';
+        emojiPicker.style.height = '0'; // Reset height when hidden
+        textareaContainer.style.bottom = '10px';
+    });
+});
 </script>
 
 </body>
