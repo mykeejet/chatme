@@ -1,7 +1,7 @@
 # Enable Rewrite Engine
 RewriteEngine On
 
-# Block all .php and .html file requests (existing or non-existing)
+# Block all .php and .html requests (whether they exist or not)
 RewriteCond %{REQUEST_URI} \.(php|html)$ [NC]
 RewriteRule ^ - [R=404,L]
 
