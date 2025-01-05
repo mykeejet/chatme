@@ -339,21 +339,28 @@ const stickyTextarea = document.querySelector('.sticky-textarea');
 const messageTextarea = document.querySelector('textarea');
 const emojiButton = document.getElementById('emoji-toggle');
 
-// Add an event listener for when the emoji search input is focused
-emojiSearchInput.addEventListener('focus', () => {
-    // Adjust styles dynamically
-    stickyTextarea.style.bottom = '276px';
+// Function to adjust styles dynamically
+function adjustLayoutForKeyboard() {
+    // Get the height of the visible area
+    const viewportHeight = window.innerHeight;
+    const inputBottomPosition = emojiSearchInput.getBoundingClientRect().bottom;
+
+    // Calculate the new bottom position for the sticky textarea
+    const keyboardHeight = viewportHeight - inputBottomPosition;
+    stickyTextarea.style.bottom = `${keyboardHeight + 50}px`; // Adjust the 50px padding as needed
     messageTextarea.style.marginTop = '-29px';
     emojiButton.style.marginTop = '-29px';
     emojiSearchInput.style.marginLeft = '-2px';
-});
+}
 
-// Optional: Reset styles when the input loses focus (if needed)
+// Add event listener for focus
+emojiSearchInput.addEventListener('focus', adjustLayoutForKeyboard);
+
+// Reset styles when the input loses focus
 emojiSearchInput.addEventListener('blur', () => {
-    // Reset styles to their original state (modify if necessary)
-    stickyTextarea.style.bottom = ''; // Reset to default or another value
-    messageTextarea.style.marginTop = ''; 
-    emojiButton.style.marginTop = ''; 
+    stickyTextarea.style.bottom = '0'; // Reset to default
+    messageTextarea.style.marginTop = '';
+    emojiButton.style.marginTop = '';
     emojiSearchInput.style.marginLeft = '';
 });
     </script>
