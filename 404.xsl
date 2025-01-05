@@ -4,11 +4,35 @@
         <html>
             <head>
                 <title>Error 404 - Page Not Found</title>
+                <style>
+                    body {
+                        font-family: Arial, sans-serif;
+                        text-align: center;
+                        padding: 50px;
+                    }
+                    h1 {
+                        color: red;
+                        font-size: 48px;
+                    }
+                    p {
+                        font-size: 18px;
+                        color: #555;
+                    }
+                    a {
+                        font-size: 16px;
+                        color: #007BFF;
+                        text-decoration: none;
+                    }
+                    a:hover {
+                        text-decoration: underline;
+                    }
+                </style>
             </head>
             <body>
-                <h1>Error 404</h1>
-                <p>Sorry, the page you are looking for does not exist.</p>
-                <a href="/">Go back to the homepage</a>
+                <h1>Error <xsl:value-of select="error/code"/></h1>
+                <p><xsl:value-of select="error/message"/></p>
+                <p><xsl:value-of select="error/description"/></p>
+                <a href="{error/link}">Go Back to Home</a>
             </body>
         </html>
     </xsl:template>
