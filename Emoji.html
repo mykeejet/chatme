@@ -247,38 +247,27 @@
 });
 </script>
 
+
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-    const emojiSearch = document.getElementById('emoji-search');
-    const emojiGrid = document.getElementById('emoji-grid');
-    const emojiSpans = emojiGrid.querySelectorAll('span');
-
-    emojiSearch.addEventListener('input', (event) => {
-        const query = event.target.value.toLowerCase();
-
-        emojiSpans.forEach(emoji => {
-            const name = emoji.getAttribute('data-name');
-            if (name && name.includes(query)) {
-                emoji.style.display = 'inline-block';
-            } else {
-                emoji.style.display = 'none';
-            }
-        });
-    });
-});
-    </script>
-
-
-    
-        <script>
     document.addEventListener("DOMContentLoaded", function () {
         const emojiToggle = document.getElementById("emoji-toggle");
         const emojiPicker = document.getElementById("emoji-picker");
         const emojiSearch = document.getElementById("emoji-search");
-        const emojiGrid = document.querySelector(".emoji-grid");
         const emojiDropdown = document.getElementById("emoji-dropdown");
 
-        const emojis = ["🤔", "🥱", "🥹", "😁", "😊", "😂", "😍", "😎", "😢", "🤩"]; // Add more emojis as needed
+        // Emoji name and symbol mapping
+        const emojiMap = [
+            { name: "think", emoji: "🤔" },
+            { name: "yawn", emoji: "🥱" },
+            { name: "tear", emoji: "🥹" },
+            { name: "grin", emoji: "😁" },
+            { name: "smile", emoji: "😊" },
+            { name: "laugh", emoji: "😂" },
+            { name: "love", emoji: "😍" },
+            { name: "cool", emoji: "😎" },
+            { name: "cry", emoji: "😢" },
+            { name: "starstruck", emoji: "🤩" },
+        ];
 
         // Track if the emoji picker is open
         let isPickerOpen = false;
@@ -302,27 +291,28 @@
             }
         });
 
-        // Search for emojis
+        // Search for emojis by name or emoji symbol
         emojiSearch.addEventListener("input", () => {
             const query = emojiSearch.value.toLowerCase();
-            const filteredEmojis = emojis.filter((emoji) =>
-                emoji.includes(query)
+            const filteredEmojis = emojiMap.filter(
+                (entry) =>
+                    entry.name.includes(query) || entry.emoji.includes(query)
             );
 
             // Clear previous dropdown content
             emojiDropdown.innerHTML = "";
 
             if (filteredEmojis.length > 0 && query) {
-                filteredEmojis.forEach((emoji) => {
+                filteredEmojis.forEach((entry) => {
                     const emojiItem = document.createElement("div");
-                    emojiItem.textContent = emoji;
+                    emojiItem.textContent = `${entry.emoji} (${entry.name})`;
                     emojiItem.style.padding = "5px";
                     emojiItem.style.cursor = "pointer";
 
                     // Add click event to select the emoji
                     emojiItem.addEventListener("click", () => {
-                        console.log("Selected emoji:", emoji);
-                        emojiSearch.value = emoji; // Echo the selected emoji in the search bar
+                        console.log("Selected emoji:", entry.emoji);
+                        emojiSearch.value = entry.emoji; // Echo the selected emoji in the search bar
                         emojiDropdown.style.display = "none"; // Hide dropdown
                     });
 
