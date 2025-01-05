@@ -31,7 +31,7 @@
             background: #fff;
             padding: 10px;
             box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
-            transition: bottom 0.3s ease;
+            transition: bottom 0.3s ease, height 0.3s ease;
         }
 
         .sticky-textarea textarea {
@@ -212,124 +212,45 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-    const emojiToggle = document.getElementById('emoji-toggle');
-    const emojiPicker = document.getElementById('emoji-picker');
-    const textareaContainer = document.getElementById('textarea-container');
+        const emojiToggle = document.getElementById('emoji-toggle');
+        const emojiPicker = document.getElementById('emoji-picker');
+        const textareaContainer = document.getElementById('textarea-container');
 
-    // Toggle emoji picker visibility
-    emojiToggle.addEventListener('click', (event) => {
-        // Prevent the click from closing the picker
-        event.stopPropagation();
-
-        // Toggle visibility
-        const isVisible = emojiPicker.style.bottom === '0px'; // Check visibility based on bottom value
-        emojiPicker.style.bottom = isVisible ? '-100%' : '-5px';
-        emojiPicker.style.height = isVisible ? '0' : '46%'; // Set height when visible
-        emojiPicker.style.display = isVisible ? 'none' : 'block'; // Ensure picker is shown
-        textareaContainer.style.bottom = isVisible ? '10px' : '312.7px';
-    });
-
-    // Insert emoji into textarea
-    emojiPicker.addEventListener('click', (event) => {
-        if (event.target.tagName === 'SPAN') {
-            const textarea = document.querySelector('.sticky-textarea textarea');
-            textarea.value += event.target.textContent;
-        }
-    });
-
-    // Close emoji picker when clicking outside
-    document.addEventListener('click', () => {
-        emojiPicker.style.bottom = '-100%';
-        emojiPicker.style.height = '0'; // Reset height when hidden
-        emojiPicker.style.display = 'none'; // Ensure picker is hidden
-        textareaContainer.style.bottom = '10px';
-    });
-});
-</script>
-
-
-    <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const emojiToggle = document.getElementById("emoji-toggle");
-        const emojiPicker = document.getElementById("emoji-picker");
-        const emojiSearch = document.getElementById("emoji-search");
-        const emojiDropdown = document.getElementById("emoji-dropdown");
-        const stickyTextareaContainer = document.querySelector(".sticky-textarea");
-
-        // Emoji name and symbol mapping
-        const emojiMap = [
-            { name: "think", emoji: "🤔" },
-            { name: "yawn", emoji: "🥱" },
-            { name: "tear", emoji: "🥹" },
-            { name: "grin", emoji: "😁" },
-            { name: "smile", emoji: "😊" },
-            { name: "laugh", emoji: "😂" },
-            { name: "love", emoji: "😍" },
-            { name: "cool", emoji: "😎" },
-            { name: "cry", emoji: "😢" },
-            { name: "excited", emoji: "🤩" },
-        ];
-
-        // Track if the emoji picker is open
-        let isPickerOpen = false;
-
-        // Toggle the emoji picker
-        emojiToggle.addEventListener("click", () => {
-            isPickerOpen = !isPickerOpen;
-            emojiPicker.style.display = isPickerOpen ? "block" : "none";
+        // Toggle emoji picker visibility
+        emojiToggle.addEventListener('click', (event) => {
+            event.stopPropagation();
+            const isVisible = emojiPicker.style.bottom === '0px';
+            emojiPicker.style.bottom = isVisible ? '-100%' : '0px';
+            emojiPicker.style.height = isVisible ? '0' : '312.7px';
+            emojiPicker.style.display = isVisible ? 'none' : 'block';
+            textareaContainer.style.bottom = isVisible ? '10px' : '312.7px';
         });
 
-        // Prevent closing when clicking inside the emoji picker
-        emojiPicker.addEventListener("click", (e) => {
-            e.stopPropagation();
+        // Maintain height when typing in emoji search box
+        const emojiSearch = document.getElementById('emoji-search');
+        emojiSearch.addEventListener('input', () => {
+            textareaContainer.style.height = '312.7px';
         });
 
-        // Close the emoji picker when clicking outside
-        document.addEventListener("click", (e) => {
-            if (isPickerOpen && !emojiPicker.contains(e.target) && e.target !== emojiToggle) {
-                isPickerOpen = false;
-                emojiPicker.style.display = "none";
-
-                // Push the sticky textarea container to the bottom with a default bottom margin of 10px
-                stickyTextareaContainer.style.position = "relative"; // Ensure the container isn't fixed
-                stickyTextareaContainer.style.bottom = "10px"; // Move to the bottom with a default margin
+        // Insert emoji into textarea
+        emojiPicker.addEventListener('click', (event) => {
+            if (event.target.tagName === 'SPAN') {
+                const textarea = document.querySelector('.sticky-textarea textarea');
+                textarea.value += event.target.textContent;
             }
         });
 
-        // Search for emojis by name or emoji symbol
-        emojiSearch.addEventListener("input", () => {
-            const query = emojiSearch.value.toLowerCase();
-            const filteredEmojis = emojiMap.filter(
-                (entry) =>
-                    entry.name.includes(query) || entry.emoji.includes(query)
-            );
-
-            // Clear previous dropdown content
-            emojiDropdown.innerHTML = "";
-
-            if (filteredEmojis.length > 0 && query) {
-                filteredEmojis.forEach((entry) => {
-                    const emojiItem = document.createElement("div");
-                    emojiItem.textContent = entry.emoji; // Only the emoji is displayed
-
-                    emojiItem.style.padding = "5px";
-                    emojiItem.style.cursor = "pointer";
-
-                    // Add click event to select the emoji
-                    emojiItem.addEventListener("click", () => {
-                        emojiSearch.value = entry.emoji; // Echo the selected emoji in the search bar
-                        emojiDropdown.style.display = "none"; // Hide dropdown
-                    });
-
-                    emojiDropdown.appendChild(emojiItem);
-                });
-                emojiDropdown.style.display = "block";
-            } else {
-                emojiDropdown.style.display = "none"; // Hide if no results
-            }
+        // Close emoji picker when clicking outside
+        document.addEventListener('click', () => {
+            emojiPicker.style.bottom = '-100%';
+            emojiPicker.style.display = 'none';
+            textareaContainer.style.bottom = '10px';
         });
+
+        // Prevent click propagation inside emoji picker
+        emojiPicker.addEventListener('click', (event) => event.stopPropagation());
     });
 </script>
-    
+
 </body>
 </html>
