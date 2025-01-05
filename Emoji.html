@@ -92,6 +92,12 @@
 </div>
 
 <div id="emoji-picker" class="emoji-picker">
+    <input 
+        type="text" 
+        id="emoji-search" 
+        placeholder="Search for an emoji..." 
+        style="width: 100%; padding: 8px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 5px;"
+    />
     <div id="emoji-category-name" style="font-weight: bold; margin-bottom: 10px; font-size: 16px;">
         Smileys and Emotions
     </div>
@@ -237,6 +243,27 @@
     });
 });
 </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+    const emojiSearch = document.getElementById('emoji-search');
+    const emojiGrid = document.getElementById('emoji-grid');
+    const emojiSpans = emojiGrid.querySelectorAll('span');
+
+    emojiSearch.addEventListener('input', (event) => {
+        const query = event.target.value.toLowerCase();
+
+        emojiSpans.forEach(emoji => {
+            const name = emoji.getAttribute('data-name');
+            if (name && name.includes(query)) {
+                emoji.style.display = 'inline-block';
+            } else {
+                emoji.style.display = 'none';
+            }
+        });
+    });
+});
+    </script>
 
 </body>
 </html>
