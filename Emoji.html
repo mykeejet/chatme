@@ -331,6 +331,22 @@
     });
 </script>
 
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+    const emojiSearch = document.getElementById('emoji-search');
+    const textareaContainer = document.getElementById('textarea-container');
+
+    // Adjust sticky-textarea when the keyboard is focused on emoji-search
+    emojiSearch.addEventListener('focus', () => {
+        textareaContainer.style.bottom = '307px';
+    });
+
+    emojiSearch.addEventListener('blur', () => {
+        textareaContainer.style.bottom = '10px'; // Reset to default
+    });
+});
+    </script>
 
 </body>
 </html>
