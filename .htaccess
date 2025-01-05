@@ -5,6 +5,6 @@ RewriteEngine On
 RewriteCond %{REQUEST_URI} \.(php|html)$ [NC]
 RewriteRule ^ - [R=404,L]
 
-# Allow specific format: mykeebloggerpage/index
-RewriteCond %{REQUEST_URI} ^mykeebloggerpage/index$ [NC]
-RewriteRule ^ - [L]
+# Allow only specific format: mykeebloggerpage/index
+RewriteCond %{REQUEST_URI} !^mykeebloggerpage/index$ [NC]
+RewriteRule ^ - [R=404,L]
