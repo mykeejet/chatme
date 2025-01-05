@@ -252,5 +252,28 @@
     });
 </script>
 
+
+    
+    <script>
+        // Assuming you're targeting the emoji picker and sticky-textarea
+const emojiPicker = document.querySelector('.emoji-picker');
+const stickyTextarea = document.querySelector('.sticky-textarea');
+
+// Function to adjust the styles
+function adjustEmojiPickerStyles() {
+    if (emojiPicker) {
+        emojiPicker.style.height = '46%';
+        emojiPicker.style.bottom = '-5px';
+    }
+    if (stickyTextarea) {
+        stickyTextarea.style.width = '312.7px';
+    }
+}
+
+// Call the function whenever needed
+adjustEmojiPickerStyles();
+
+    </script>
+
 </body>
 </html>
