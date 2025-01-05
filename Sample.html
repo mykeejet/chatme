@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web version of WeinG</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Emoji Button */
+        .emoji-button {
+            background: none;
+            border: none;
+            font-size: 24px;
+            margin-left: 10px;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .sticky-textarea {
+            position: fixed;
+            bottom: 10px;
+            left: 0;
+            right: 0;
+            display: flex;
+            align-items: center;
+            background: #fff;
+            padding: 10px;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+            transition: bottom 0.3s ease, height 0.3s ease;
+        }
+
+        .sticky-textarea textarea {
+            flex: 1;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            resize: none;
+        }
+
+        /* Emoji Picker */
+        .emoji-picker {
+            position: fixed;
+            bottom: -100%; /* Hidden by default */
+            left: 0;
+            overflow-y: scroll;
+            right: 0;
+            background: #fff;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            display: none; /* Hidden by default */
+            z-index: 1000;
+            transition: bottom 0.3s ease;
+        }
+
+        .emoji-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .emoji-grid span {
+            font-size: 24px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .emoji-grid span:hover {
+            transform: scale(1.2);
+        }
+
+        /* Media Query for Desktop */
+        @media (min-width: 1024px) {
+            .emoji-picker {
+                bottom: auto; /* Reset bottom for desktop */
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="sticky-textarea" id="textarea-container">
+    <textarea rows="1" placeholder="Type a message..."></textarea>
+    <button id="emoji-toggle" class="emoji-button">😊</button>
+</div>
+
+<div id="emoji-picker" class="emoji-picker">
+    <input 
+        type="text" 
+        id="emoji-search" 
+        placeholder="Search for an emoji..." 
+        style="width: 100%; padding: 8px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 5px;"
+    />
+    <div id="emoji-dropdown" class="emoji-dropdown" style="position: absolute; top: 50px; width: 100%; background: white; border: 1px solid #ccc; border-radius: 5px; display: none; max-height: 150px; overflow-y: auto; z-index: 1000;">
+        <!-- Filtered emoji results will appear here -->
+    </div>
+    <div id="emoji-category-name" style="font-weight: bold; margin-bottom: 10px; font-size: 16px;">
+        Smileys and Emotions
+    </div>
+    <div class="emoji-grid">
+        <!-- Emojis -->
+        <span>🤔</span>
+        <span>🥱</span>
+        <span>🥹</span>
+        <span>😁</span>
+        <span>🫡</span>
+        <span>🤩</span>
+        <span>😂</span>
+        <span>😁</span>
+        <span>😄</span>
+        <span>😙</span>
+        <span>😗</span>
+        <span>😚</span>
+        <span>😉</span>
+        <span>😀</span>
+        <span>😘</span>
+        <span>🥰</span>
+        <span>😍</span>
+        <span>🤩</span>
+        <span>🥳</span>
+        <span>😏</span>
+        <span>🥺</span>
+        <span>😔</span>
+        <span>😌</span>
+        <span>☺️</span>
+        <span>🥴</span>
+        <span>🤪</span>
+        <span>😊</span>
+        <span>😜</span>
+        <span>🥹</span>
+        <span>🥲</span>
+        <span>😝</span>
+        <span>😛</span>
+        <span>🙂</span>
+        <span>🙃</span>
+        <span>😋</span>
+        <span>🫠</span>
+        <span>🤤</span>
+        <span>😬</span>
+        <span>😑</span>
+        <span>🫥</span>
+        <span>😶‍🌫️</span>
+        <span>😶</span>
+        <span>🤐</span>
+        <span>🫡</span>
+        <span>🤔</span>
+        <span>🧐</span>
+        <span>🤨</span>
+        <span>😱</span>
+        <span>🫣</span>
+        <span>🤗</span>
+        <span>🥱</span>
+        <span>🤭</span>
+        <span>🫢</span>
+        <span>🤫</span>
+        <span>😒</span>
+        <span>🙄</span>
+        <span>😮‍💨</span>
+        <span>😤</span>
+        <span>😠</span>
+        <span>😡</span>
+        <span>🤬</span>
+        <span>😞</span>
+        <span>😓</span>
+        <span>😨</span>
+        <span>😰</span>
+        <span>😕</span>
+        <span>🫤</span>
+        <span>🙁</span>
+        <span>☹️</span>
+        <span>😢</span>
+        <span>😥</span>
+        <span>😟</span>
+        <span>😧</span>
+        <span>😦</span>
+        <span>😯</span>
+        <span>😲</span>
+        <span>😳</span>
+        <span>🤯</span>
+        <span>😖</span>
+        <span>😣</span>
+        <span>😴</span>
+        <span>🤮</span>
+        <span>🤢</span>
+        <span>🥵</span>
+        <span>🥶</span>
+        <span>😵‍💫</span>
+        <span>😵</span>
+        <span>😫</span>
+        <span>😩</span>
+        <span>😪</span>
+        <span>🤧</span>
+        <span>🤒</span>
+        <span>🤕</span>
+        <span>😷</span>
+        <span>🤥</span>
+        <span>😇</span>
+        <span>🤠</span>
+        <span>🤑</span>
+        <span>🥸</span>
+        <span>😎</span>
+        <span>🤓</span>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const emojiToggle = document.getElementById('emoji-toggle');
+        const emojiPicker = document.getElementById('emoji-picker');
+        const textareaContainer = document.getElementById('textarea-container');
+
+        // Toggle emoji picker visibility
+        emojiToggle.addEventListener('click', (event) => {
+            event.stopPropagation();
+            const isVisible = emojiPicker.style.bottom === '0px';
+            emojiPicker.style.bottom = isVisible ? '-100%' : '0px';
+            emojiPicker.style.height = isVisible ? '0' : '312.7px';
+            emojiPicker.style.display = isVisible ? 'none' : 'block';
+            textareaContainer.style.bottom = isVisible ? '10px' : '312.7px';
+        });
+
+        // Maintain height when typing in emoji search box
+        const emojiSearch = document.getElementById('emoji-search');
+        emojiSearch.addEventListener('input', () => {
+            textareaContainer.style.height = '312.7px';
+        });
+
+        // Insert emoji into textarea
+        emojiPicker.addEventListener('click', (event) => {
+            if (event.target.tagName === 'SPAN') {
+                const textarea = document.querySelector('.sticky-textarea textarea');
+                textarea.value += event.target.textContent;
+            }
+        });
+
+        // Close emoji picker when clicking outside
+        document.addEventListener('click', () => {
+            emojiPicker.style.bottom = '-100%';
+            emojiPicker.style.display = 'none';
+            textareaContainer.style.bottom = '10px';
+        });
+
+        // Prevent click propagation inside emoji picker
+        emojiPicker.addEventListener('click', (event) => event.stopPropagation());
+    });
+</script>
+
+    
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const emojiToggle = document.getElementById("emoji-toggle");
+        const emojiPicker = document.getElementById("emoji-picker");
+        const emojiSearch = document.getElementById("emoji-search");
+        const emojiDropdown = document.getElementById("emoji-dropdown");
+
+        // Emoji name and symbol mapping
+        const emojiMap = [
+            { name: "think", emoji: "🤔" },
+            { name: "yawn", emoji: "🥱" },
+            { name: "tear", emoji: "🥹" },
+            { name: "grin", emoji: "😁" },
+            { name: "smile", emoji: "😊" },
+            { name: "laugh", emoji: "😂" },
+            { name: "love", emoji: "😍" },
+            { name: "cool", emoji: "😎" },
+            { name: "cry", emoji: "😢" },
+            { name: "starstruck", emoji: "🤩" },
+        ];
+
+        // Track if the emoji picker is open
+        let isPickerOpen = false;
+
+        // Toggle the emoji picker
+        emojiToggle.addEventListener("click", () => {
+            isPickerOpen = !isPickerOpen;
+            emojiPicker.style.display = isPickerOpen ? "block" : "none";
+        });
+
+        // Prevent closing when clicking inside the emoji picker
+        emojiPicker.addEventListener("click", (e) => {
+            e.stopPropagation();
+        });
+
+        // Close the emoji picker when clicking outside
+        document.addEventListener("click", (e) => {
+            if (isPickerOpen && !emojiPicker.contains(e.target) && e.target !== emojiToggle) {
+                isPickerOpen = false;
+                emojiPicker.style.display = "none";
+            }
+        });
+
+        // Search for emojis by name or emoji symbol
+        emojiSearch.addEventListener("input", () => {
+            const query = emojiSearch.value.toLowerCase();
+            const filteredEmojis = emojiMap.filter(
+                (entry) =>
+                    entry.name.includes(query) || entry.emoji.includes(query)
+            );
+
+            // Clear previous dropdown content
+            emojiDropdown.innerHTML = "";
+
+            if (filteredEmojis.length > 0 && query) {
+                filteredEmojis.forEach((entry) => {
+                    const emojiItem = document.createElement("div");
+                    emojiItem.textContent = entry.emoji; // Only the emoji is displayed
+
+                    emojiItem.style.padding = "5px";
+                    emojiItem.style.cursor = "pointer";
+
+                    // Add click event to select the emoji
+                    emojiItem.addEventListener("click", () => {
+                        emojiSearch.value = entry.emoji; // Echo the selected emoji in the search bar
+                        emojiDropdown.style.display = "none"; // Hide dropdown
+                    });
+
+                    emojiDropdown.appendChild(emojiItem);
+                });
+                emojiDropdown.style.display = "block";
+            } else {
+                emojiDropdown.style.display = "none"; // Hide if no results
+            }
+        });
+    });
+</script>
+
+
+</body>
+</html>
