@@ -215,6 +215,7 @@
         const emojiToggle = document.getElementById('emoji-toggle');
         const emojiPicker = document.getElementById('emoji-picker');
         const textareaContainer = document.getElementById('textarea-container');
+        const emojiSearch = document.getElementById('emoji-search');
 
         // Toggle emoji picker visibility
         emojiToggle.addEventListener('click', (event) => {
@@ -226,10 +227,21 @@
             textareaContainer.style.bottom = isVisible ? '10px' : '312.7px';
         });
 
-        // Maintain height when typing in emoji search box
-        const emojiSearch = document.getElementById('emoji-search');
+        // Adjust styles when interacting with emoji search
+        emojiSearch.addEventListener('focus', () => {
+            emojiPicker.style.bottom = '105px'; // Adjust emoji picker position
+            textareaContainer.style.bottom = '205.7px'; // Adjust sticky-textarea position
+        });
+
         emojiSearch.addEventListener('input', () => {
-            textareaContainer.style.height = '312.7px';
+            emojiPicker.style.bottom = '105px'; // Maintain adjusted position while typing
+            textareaContainer.style.bottom = '205.7px';
+        });
+
+        // Reset styles when focus is lost from emoji search
+        emojiSearch.addEventListener('blur', () => {
+            emojiPicker.style.bottom = '0px'; // Reset emoji picker position
+            textareaContainer.style.bottom = '312.7px'; // Reset sticky-textarea position
         });
 
         // Insert emoji into textarea
@@ -251,9 +263,6 @@
         emojiPicker.addEventListener('click', (event) => event.stopPropagation());
     });
 </script>
-
-
-    
     
 </body>
 </html>
