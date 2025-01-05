@@ -98,6 +98,9 @@
         placeholder="Search for an emoji..." 
         style="width: 100%; padding: 8px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 5px;"
     />
+    <div id="emoji-dropdown" class="emoji-dropdown" style="position: absolute; top: 50px; width: 100%; background: white; border: 1px solid #ccc; border-radius: 5px; display: none; max-height: 150px; overflow-y: auto; z-index: 1000;">
+        <!-- Filtered emoji results will appear here -->
+    </div>
     <div id="emoji-category-name" style="font-weight: bold; margin-bottom: 10px; font-size: 16px;">
         Smileys and Emotions
     </div>
@@ -273,6 +276,9 @@
         const emojiPicker = document.getElementById("emoji-picker");
         const emojiSearch = document.getElementById("emoji-search");
         const emojiGrid = document.querySelector(".emoji-grid");
+        const emojiDropdown = document.getElementById("emoji-dropdown");
+
+        const emojis = ["🤔", "🥱", "🥹", "😁", "😊", "😂", "😍", "😎", "😢", "🤩"]; // Add more emojis as needed
 
         // Track if the emoji picker is open
         let isPickerOpen = false;
@@ -296,16 +302,38 @@
             }
         });
 
-        // Example action for emoji clicks
-        emojiGrid.addEventListener("click", (e) => {
-            if (e.target.tagName === "SPAN") {
-                const selectedEmoji = e.target.textContent;
-                console.log("Selected emoji:", selectedEmoji);
-                // Do something with the selected emoji
+        // Search for emojis
+        emojiSearch.addEventListener("input", () => {
+            const query = emojiSearch.value.toLowerCase();
+            const filteredEmojis = emojis.filter((emoji) =>
+                emoji.includes(query)
+            );
+
+            // Clear previous dropdown content
+            emojiDropdown.innerHTML = "";
+
+            if (filteredEmojis.length > 0 && query) {
+                filteredEmojis.forEach((emoji) => {
+                    const emojiItem = document.createElement("div");
+                    emojiItem.textContent = emoji;
+                    emojiItem.style.padding = "5px";
+                    emojiItem.style.cursor = "pointer";
+
+                    // Add click event to select the emoji
+                    emojiItem.addEventListener("click", () => {
+                        console.log("Selected emoji:", emoji);
+                        emojiSearch.value = emoji; // Echo the selected emoji in the search bar
+                        emojiDropdown.style.display = "none"; // Hide dropdown
+                    });
+
+                    emojiDropdown.appendChild(emojiItem);
+                });
+                emojiDropdown.style.display = "block";
+            } else {
+                emojiDropdown.style.display = "none"; // Hide if no results
             }
         });
     });
 </script>
-
 </body>
 </html>
