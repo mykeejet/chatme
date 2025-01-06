@@ -346,9 +346,19 @@
 <script>
     // Clear button functionality
     document.getElementById("clear-btn").addEventListener("click", function () {
-        document.querySelector("#textarea-container textarea").value = ""; // Clears the textarea
+        // Select all textareas in the container
+        const textareas = document.querySelectorAll("#textarea-container textarea");
+        for (let i = 0; i < textareas.length; i++) {
+            if (textareas[i].value !== "") { // Check if the textarea is not empty
+                textareas[i].value = ""; // Clear the first non-empty textarea
+                break; // Exit the loop after clearing one textarea
+            }
+        }
     });
 </script>
+
+
+    
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
