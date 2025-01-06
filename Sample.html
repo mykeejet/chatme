@@ -335,13 +335,32 @@
         
         </div>
     <div id="footer" style="background: #f2f2f2; border-top: 1px solid #ccc; padding: 10px; text-align: right; width: 100%; margin-left: -9px; position: fixed; z-index: 1000; bottom: 0;">
+        <div class="outside-emoji" style="font-size: 24px; cursor: pointer;">😄</div>
     <button id="clear-btn" style="background: none; border: none; font-size: 18px; cursor: pointer; color: #333;">
-        &#x2716; <button class="btn-icon menu-horizontal-div-item emoji-tabs-delete justify-self-end" data-tab="-1"><span class="tgico button-icon"></span></button> <!-- 'x' symbol -->
+        &#x2716; <!-- 'x' symbol -->
     </button>
     </div>
     
 </div>
- 
+ <script>
+// Select the outside emoji and emoji grid
+const outsideEmoji = document.querySelector(".outside-emoji");
+const emojiGrid = document.querySelector(".emoji-grid");
+
+// Add an event listener to the outside emoji
+outsideEmoji.addEventListener("click", () => {
+    // Get all the emojis inside the emoji grid
+    const emojis = emojiGrid.querySelectorAll("span");
+    
+    // Log all the emojis to the console or perform any action
+    emojis.forEach((emoji) => {
+        console.log(emoji.textContent); // This will print 🤔, 🥱, 😄
+    });
+});
+     
+
+     
+ </script>
 
 <script>
     // Clear button functionality
