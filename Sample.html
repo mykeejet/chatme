@@ -489,19 +489,31 @@
     document.getElementById("clear-btn").addEventListener("click", function () {
         // Select all textareas in the container
         const textareas = document.querySelectorAll("#textarea-container textarea");
+
+        // Function to clear text one letter at a time
+        function clearText(textarea) {
+            let text = textarea.value;
+            if (text.length > 0) {
+                textarea.value = text.slice(0, -1); // Remove the last character
+                setTimeout(() => clearText(textarea), 100); // Call recursively after 100ms
+            }
+        }
+
         for (let i = 0; i < textareas.length; i++) {
             if (textareas[i].value !== "") { // Check if the textarea is not empty
-                textareas[i].value = ""; // Clear the first non-empty textarea
-                break; // Exit the loop after clearing one textarea
+                clearText(textareas[i]); // Start clearing the first non-empty textarea
+                break; // Exit the loop after starting the clear process
             }
         }
     });
 </script>
 
 
+
     
 
 <script>
+    // Emoji visibility
     document.addEventListener('DOMContentLoaded', () => {
         const emojiToggle = document.getElementById('emoji-toggle');
         const emojiPicker = document.getElementById('emoji-picker');
