@@ -460,7 +460,7 @@
     <!-- Clear Button Replaced with Span -->
   <button id="clear-btn" aria-label="Backspace">
     <span class="material-icons">backspace</span>
-  </button>
+</button>
     </div>
     
 </div>
@@ -489,7 +489,9 @@
 
 <script>
         // Add a click event listener to the clear button
-        document.getElementById("clear-btn").addEventListener("click", function () {
+        document.getElementById("clear-btn").addEventListener("click", function (event) {
+            event.preventDefault(); // Prevent default behavior of the button
+            
             const textarea = document.getElementById("emoji-textarea");
 
             // Check if there's content in the textarea
