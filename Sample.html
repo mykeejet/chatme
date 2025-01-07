@@ -457,11 +457,14 @@
     
     <div id="footer" style="background: #f2f2f2; border-top: 1px solid #ccc; padding: 10px; text-align: right; width: 100%; margin-left: -9px; position: fixed; z-index: 1000; bottom: 0;">
         <div class="outside-emoji" style="font-size: 24px; cursor: pointer; position: absolute; margin-left: 30px; outline: none; border: none;">😄</div>
-    <button id="clear-btn" style="background: none; border: none; font-size: 18px; cursor: pointer; color: #333;">
-    
-<span class="material-icons">backspace</span>
-<!-- 'x' symbol -->
-    </button>
+    <!-- Clear Button Replaced with Span -->
+  <span 
+    id="clear-btn" 
+    class="material-icons" 
+    style="cursor: pointer; font-size: 24px; color: #333;" 
+    aria-hidden="true">backspace</span>
+
+  <script>
     </div>
     
 </div>
@@ -491,7 +494,7 @@
 <script>
     // Clear button functionality
     document.getElementById("clear-btn").addEventListener("click", function (event) {
-        event.preventDefault(); // Prevent any default button behavior
+        event.preventDefault(); // Prevent any default behavior
 
         // Get the textarea
         const textarea = document.getElementById("emoji-textarea");
@@ -529,7 +532,7 @@
             emojiPicker.style.bottom = isVisible ? '-100%' : '0px';
             emojiPicker.style.height = isVisible ? '0' : '312.7px';
             emojiPicker.style.display = isVisible ? 'none' : 'block';
-            textareaContainer.style.bottom = isVisible ? '10px' : '312.7px';
+            textareaContainer.style.bottom = isVisible ? '-5px' : '312.7px';
         });
 
         // Maintain height when typing in emoji search box
