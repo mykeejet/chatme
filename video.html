@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video Recorder with Fade Effect and Camera Switch</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<style>
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  padding: 20px;
+}
+
+.controls {
+  margin-bottom: 20px;
+}
+
+button {
+  padding: 10px;
+  font-size: 16px;
+  margin: 5px;
+}
+
+.video-container {
+  position: relative;
+  width: 640px;
+  height: 480px;
+  margin: 0 auto;
+}
+
+video {
+  width: 100%;
+  height: 100%;
+}
+
+.fade {
+  transition: opacity 1s ease-in-out;
+  opacity: 0.5;
+}
+</style>
+  <div class="controls">
+    <button id="fadeToggle">Toggle Fade Effect</button>
+    <button id="startStop">Start Recording</button>
+    <button id="download" disabled>Download Video</button>
+    <button id="switchCamera">Switch Camera</button>
+  </div>
+  <div class="video-container">
+    <video id="video" autoplay muted></video>
+    <video id="recordedVideo" controls></video>
+  </div>
+  <script>
+// Get the video elements and buttons
+const videoElement = document.getElementById('video');
+const recordedVideoElement = document.getElementById('recordedVideo');
+const fadeToggleButton = document.getElementById('fadeToggle');
+const startStopButton = document.getElementById('startStop');
+const downloadButton = document.getElementById('download');
+const switchCameraButton = document.getElementById('switchCamera');
+
+// MediaRecorder setup
+let mediaRecorder;
+let recordedChunks = [];
+let isRecording = false;
+let isFadeEnabled = false;
+let currentStream;
+let currentDeviceId = '';
+
+// Access available media devices
+let videoDevices = [];
+
+// Get list of media devices (front/back cameras)
+navigator.mediaDevices.enumerateDevices()
+  .then(devices => {
+    videoDevices = devices.filter(device => device.kind === 'videoinput');
+    if (videoDevices.length > 0) {
+      currentDeviceId = videoDevices[0].deviceId;  // Start with the first video device (usually front camera)
+      startCamera(currentDeviceId);
+    } else {
+      console.error('No video devices found.');
+    }
+  })
+  .catch(err => console.error('Error accessing media devices:', err));
+
+// Function to start camera with specific device ID
+function startCamera(deviceId) {
+  if (currentStream) {
+    currentStream.getTracks().forEach(track => track.stop());  // Stop the previous stream
+  }
+
+  navigator.mediaDevices.getUserMedia({ video: { deviceId: { exact: deviceId } } })
+    .then(stream => {
+      currentStream = stream;
+      videoElement.srcObject = stream;
+
+      // Initialize MediaRecorder with the new stream
+      if (mediaRecorder) {
+        mediaRecorder.stream = stream;  // Update the stream for the MediaRecorder
+      } else {
+        mediaRecorder = new MediaRecorder(stream);
+        mediaRecorder.ondataavailable = event => {
+          recordedChunks.push(event.data);
+        };
+        mediaRecorder.onstop = () => {
+          const blob = new Blob(recordedChunks, { type: 'video/webm' });
+          const videoURL = URL.createObjectURL(blob);
+          recordedVideoElement.src = videoURL;
+          recordedChunks = [];
+          downloadButton.disabled = false;
+        };
+      }
+    })
+    .catch(err => console.error('Error starting camera:', err));
+}
+
+// Toggle fade effect
+fadeToggleButton.addEventListener('click', () => {
+  isFadeEnabled = !isFadeEnabled;
+  if (isFadeEnabled) {
+    videoElement.classList.add('fade');
+  } else {
+    videoElement.classList.remove('fade');
+  }
+});
+
+// Start or stop recording
+startStopButton.addEventListener('click', () => {
+  if (isRecording) {
+    mediaRecorder.stop();
+    startStopButton.textContent = 'Start Recording';
+    isRecording = false;
+  } else {
+    mediaRecorder.start();
+    startStopButton.textContent = 'Stop Recording';
+    isRecording = true;
+  }
+});
+
+// Download the recorded video
+downloadButton.addEventListener('click', () => {
+  const videoURL = recordedVideoElement.src;
+  const a = document.createElement('a');
+  a.href = videoURL;
+  a.download = 'recorded-video.webm';
+  a.click();
+});
+
+// Switch camera (front/back)
+switchCameraButton.addEventListener('click', () => {
+  // Get the next video device in the list (loop back to the first device if needed)
+  const currentIndex = videoDevices.findIndex(device => device.deviceId === currentDeviceId);
+  const nextIndex = (currentIndex + 1) % videoDevices.length;
+  currentDeviceId = videoDevices[nextIndex].deviceId;
+
+  startCamera(currentDeviceId);  // Restart camera with the new device
+});
+
+</script>
+
+</body>
+</html>
