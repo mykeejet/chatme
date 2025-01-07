@@ -488,26 +488,25 @@
 
 
 <script>
-    // Clear button functionality (Backspace)
+    // Backspace functionality for clearing one character or emoji at a time
     document.getElementById("clear-btn").addEventListener("click", function (event) {
-      event.preventDefault(); // Prevent default button behavior
-
+      event.preventDefault(); // Prevent any unintended default action
+      
       const textarea = document.getElementById("emoji-textarea");
 
-      // Check if the textarea is not empty
+      // Ensure the textarea has content to clear
       if (textarea.value !== "") {
-        // Convert the value to an array of characters (handles emojis safely)
+        // Convert the textarea value to an array of characters (handles emojis safely)
         const chars = Array.from(textarea.value);
 
-        // Remove the last character (emoji or text)
+        // Remove the last character
         chars.pop();
 
         // Update the textarea value
-        textarea.value = chars.join('');
+        textarea.value = chars.join("");
       }
     });
-  </script>
-
+</script>
 
 
     
