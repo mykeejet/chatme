@@ -489,21 +489,18 @@
 
 
 <script>
-    // Clear button and emoji clear button 
+    // Clear button functionality
     document.getElementById("clear-btn").addEventListener("click", function () {
-        // Select all textareas in the container
-        const textareas = document.querySelectorAll("#textarea-container textarea");
+        // Get the textarea
+        const textarea = document.getElementById("emoji-textarea");
 
-        // Loop through the textareas
-        for (let i = 0; i < textareas.length; i++) {
-            const textarea = textareas[i];
-            if (textarea.value !== "") { // Check if the textarea is not empty
-                // Convert to an array of characters to handle emojis properly
-                const chars = Array.from(textarea.value);
-                chars.pop(); // Remove the last character (handles emojis safely)
-                textarea.value = chars.join(''); // Convert back to a string
-                break; // Stop after clearing one character in one textarea
-            }
+        if (textarea.value !== "") {
+            // Convert the textarea value to an array of characters (handles emojis properly)
+            const chars = Array.from(textarea.value);
+            // Remove the last character (emoji or regular text)
+            chars.pop();
+            // Update the textarea with the modified string
+            textarea.value = chars.join('');
         }
     });
   </script>
