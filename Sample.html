@@ -465,6 +465,7 @@
 
 
     <script>
+        //Emoji Auto detector 
         // Wait for the DOM to load
         document.addEventListener("DOMContentLoaded", () => {
             // Select the outside emoji and the emoji grid
@@ -494,13 +495,16 @@
         for (let i = 0; i < textareas.length; i++) {
             const textarea = textareas[i];
             if (textarea.value !== "") { // Check if the textarea is not empty
-                // Remove only one character from the end
-                textarea.value = textarea.value.slice(0, -1); 
+                // Convert to an array of characters to handle emojis properly
+                const chars = Array.from(textarea.value);
+                chars.pop(); // Remove the last character (handles emojis safely)
+                textarea.value = chars.join(''); // Convert back to a string
                 break; // Stop after clearing one character in one textarea
             }
         }
     });
 </script>
+
 
 
 
