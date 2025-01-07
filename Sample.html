@@ -464,7 +464,6 @@
     style="cursor: pointer; font-size: 24px; color: #333;" 
     aria-hidden="true">backspace</span>
 
-  <script>
     </div>
     
 </div>
@@ -500,24 +499,24 @@
       });
     });
 
-    // Clear button functionality
-    document.getElementById("clear-btn").addEventListener("click", function () {
-        const textarea = document.getElementById("emoji-textarea");
+    // Clear button functionality (Backspace for emojis or text)
+    document.getElementById("clear-btn").addEventListener("click", function (event) {
+      event.preventDefault(); // Prevent any default behavior
+      const textarea = document.getElementById("emoji-textarea");
 
-        // Check if the textarea is not empty
-        if (textarea.value !== "") {
-            // Convert the value to an array of characters (to handle emojis safely)
-            const chars = Array.from(textarea.value);
+      // Check if the textarea is not empty
+      if (textarea.value !== "") {
+        // Convert the value to an array of characters (to handle emojis safely)
+        const chars = Array.from(textarea.value);
 
-            // Remove the last character (emoji or text)
-            chars.pop();
+        // Remove the last character (emoji or text)
+        chars.pop();
 
-            // Update the textarea value
-            textarea.value = chars.join('');
-        }
+        // Update the textarea value
+        textarea.value = chars.join('');
+      }
     });
   </script>
-
 
 
 
