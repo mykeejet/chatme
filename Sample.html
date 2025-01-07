@@ -342,25 +342,27 @@
     </div>
     
 </div>
- <script>
-// Select the outside emoji and emoji grid
-const outsideEmoji = document.querySelector(".outside-emoji");
-const emojiGrid = document.querySelector(".emoji-grid");
 
-// Add an event listener to the outside emoji
-outsideEmoji.addEventListener("click", () => {
-    // Get all the emojis inside the emoji grid
-    const emojis = emojiGrid.querySelectorAll("span");
+
+    <script>
+        // Wait for the DOM to load
+        document.addEventListener("DOMContentLoaded", () => {
+            // Select the outside emoji and the emoji grid
+            const outsideEmoji = document.querySelector(".outside-emoji");
+            const emojiGrid = document.querySelector(".emoji-grid");
+
+            // Add click event listener to the outside emoji
+            outsideEmoji.addEventListener("click", () => {
+                // Scroll to the emoji grid with smooth behavior
+                emojiGrid.scrollIntoView({ behavior: "smooth", block: "start" });
+
+                // Log action for debugging
+                console.log("Scrolled to Emoji Grid");
+            });
+        });
+    </script>
     
-    // Log all the emojis to the console or perform any action
-    emojis.forEach((emoji) => {
-        console.log(emoji.textContent); // This will print 🤔, 🥱, 😄
-    });
-});
-     
 
-     
- </script>
 
 <script>
     // Clear button functionality
