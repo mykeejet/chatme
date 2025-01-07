@@ -492,16 +492,21 @@
 
 
 <script>
-    // Clear button functionality
-    document.getElementById("clear-btn").addEventListener("click", function (event) {
-        event.preventDefault(); // Prevent any default behavior
+    // Adding emojis to the textarea when clicked
+    document.querySelectorAll(".emoji-grid span").forEach((emoji) => {
+      emoji.addEventListener("click", function () {
+        const textarea = document.getElementById("emoji-textarea");
+        textarea.value += emoji.textContent; // Add emoji to the textarea
+      });
+    });
 
-        // Get the textarea
+    // Clear button functionality
+    document.getElementById("clear-btn").addEventListener("click", function () {
         const textarea = document.getElementById("emoji-textarea");
 
         // Check if the textarea is not empty
         if (textarea.value !== "") {
-            // Convert the value to an array of characters (handles emojis properly)
+            // Convert the value to an array of characters (to handle emojis safely)
             const chars = Array.from(textarea.value);
 
             // Remove the last character (emoji or text)
