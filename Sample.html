@@ -490,7 +490,9 @@
 
 <script>
     // Clear button functionality
-    document.getElementById("clear-btn").addEventListener("click", function () {
+    document.getElementById("clear-btn").addEventListener("click", function (event) {
+        event.preventDefault(); // Prevent any default behavior (just in case)
+
         // Get the textarea
         const textarea = document.getElementById("emoji-textarea");
 
