@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Emoji Backspace Fix</title>
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    #clear-btn {
+      cursor: pointer;
+      font-size: 24px;
+      color: #333;
+      border: none;
+      background: none;
+    }
+    #emoji-textarea {
+      width: 100%;
+      font-size: 16px;
+      padding: 8px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Textarea -->
+  <div id="textarea-container">
+    <textarea id="emoji-textarea" rows="1" placeholder="Type a message..."></textarea>
+  </div>
+
+  <!-- Backspace Button -->
+  <button id="clear-btn" aria-label="Backspace">
+    <span class="material-icons">backspace</span>
+  </button>
+
+  <script>
+    // Backspace functionality for clearing one character or emoji at a time
+    document.getElementById("clear-btn").addEventListener("click", function (event) {
+      event.preventDefault(); // Prevent any unintended default action
+      
+      const textarea = document.getElementById("emoji-textarea");
+
+      // Ensure the textarea has content to clear
+      if (textarea.value !== "") {
+        // Convert the textarea value to an array of characters (handles emojis safely)
+        const chars = Array.from(textarea.value);
+
+        // Remove the last character
+        chars.pop();
+
+        // Update the textarea value
+        textarea.value = chars.join("");
+      }
+    });
+  </script>
+</body>
+</html>
