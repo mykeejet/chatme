@@ -458,12 +458,9 @@
     <div id="footer" style="background: #f2f2f2; border-top: 1px solid #ccc; padding: 10px; text-align: right; width: 100%; margin-left: -9px; position: fixed; z-index: 1000; bottom: 0;">
         <div class="outside-emoji" style="font-size: 24px; cursor: pointer; position: absolute; margin-left: 30px; outline: none; border: none;">😄</div>
     <!-- Clear Button Replaced with Span -->
-  <span 
-    id="clear-btn" 
-    class="material-icons" 
-    style="cursor: pointer; font-size: 24px; color: #333;" 
-    aria-hidden="true">backspace</span>
-
+  <button id="clear-btn" style="background: none; border: none; cursor: pointer;">
+    <span class="material-icons">backspace</span>
+  </button>
     </div>
     
 </div>
@@ -491,22 +488,15 @@
 
 
 <script>
-    // Adding emojis to the textarea when clicked
-    document.querySelectorAll(".emoji-grid span").forEach((emoji) => {
-      emoji.addEventListener("click", function () {
-        const textarea = document.getElementById("emoji-textarea");
-        textarea.value += emoji.textContent; // Add emoji to the textarea
-      });
-    });
-
-    // Clear button functionality (Backspace for emojis or text)
+    // Clear button functionality (Backspace)
     document.getElementById("clear-btn").addEventListener("click", function (event) {
-      event.preventDefault(); // Prevent any default behavior
+      event.preventDefault(); // Prevent default button behavior
+
       const textarea = document.getElementById("emoji-textarea");
 
       // Check if the textarea is not empty
       if (textarea.value !== "") {
-        // Convert the value to an array of characters (to handle emojis safely)
+        // Convert the value to an array of characters (handles emojis safely)
         const chars = Array.from(textarea.value);
 
         // Remove the last character (emoji or text)
