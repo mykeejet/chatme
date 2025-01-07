@@ -26,7 +26,7 @@
 
         .sticky-textarea {
             position: fixed;
-            bottom: 10px;
+            bottom: -5px;
             left: 0;
             right: 0;
             display: flex;
@@ -490,19 +490,13 @@
         // Select all textareas in the container
         const textareas = document.querySelectorAll("#textarea-container textarea");
 
-        // Function to clear text one letter at a time
-        function clearText(textarea) {
-            let text = textarea.value;
-            if (text.length > 0) {
-                textarea.value = text.slice(0, -1); // Remove the last character
-                setTimeout(() => clearText(textarea), 100); // Call recursively after 100ms
-            }
-        }
-
+        // Loop through the textareas
         for (let i = 0; i < textareas.length; i++) {
-            if (textareas[i].value !== "") { // Check if the textarea is not empty
-                clearText(textareas[i]); // Start clearing the first non-empty textarea
-                break; // Exit the loop after starting the clear process
+            const textarea = textareas[i];
+            if (textarea.value !== "") { // Check if the textarea is not empty
+                // Remove only one character from the end
+                textarea.value = textarea.value.slice(0, -1); 
+                break; // Stop after clearing one character in one textarea
             }
         }
     });
