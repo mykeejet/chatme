@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Video Recorder with Fade Effect and Camera Switch</title>
+  <title>Video Recorder with Filter and Camera Switch</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<style>
-body {
+  <style>
+    body {
   font-family: Arial, sans-serif;
   text-align: center;
   padding: 20px;
@@ -40,25 +40,24 @@ video {
   transition: opacity 1s ease-in-out;
   opacity: 0.5;
 }
-</style>
+
+  </style>
   <div class="controls">
-    <button id="fadeToggle">Toggle Fade Effect</button>
+    <button id="applyFilter">Apply Fade Filter</button>
     <button id="startStop">Start Recording</button>
     <button id="download" disabled>Download Video</button>
-    <button id="switchCamera">Switch Camera</button>
   </div>
   <div class="video-container">
     <video id="video" autoplay muted></video>
     <video id="recordedVideo" controls></video>
   </div>
   <script>
-// Get the video elements and buttons
+    // Get the video elements and buttons
 const videoElement = document.getElementById('video');
 const recordedVideoElement = document.getElementById('recordedVideo');
-const fadeToggleButton = document.getElementById('fadeToggle');
+const applyFilterButton = document.getElementById('applyFilter');
 const startStopButton = document.getElementById('startStop');
 const downloadButton = document.getElementById('download');
-const switchCameraButton = document.getElementById('switchCamera');
 
 // MediaRecorder setup
 let mediaRecorder;
@@ -76,7 +75,7 @@ navigator.mediaDevices.enumerateDevices()
   .then(devices => {
     videoDevices = devices.filter(device => device.kind === 'videoinput');
     if (videoDevices.length > 0) {
-      currentDeviceId = videoDevices[0].deviceId;  // Start with the first video device (usually front camera)
+      currentDeviceId = videoDevices[0].deviceId;  // Start with the front camera
       startCamera(currentDeviceId);
     } else {
       console.error('No video devices found.');
@@ -115,15 +114,41 @@ function startCamera(deviceId) {
     .catch(err => console.error('Error starting camera:', err));
 }
 
-// Toggle fade effect
-fadeToggleButton.addEventListener('click', () => {
+// Apply fade effect and switch camera based on the fade state
+applyFilterButton.addEventListener('click', () => {
   isFadeEnabled = !isFadeEnabled;
+
   if (isFadeEnabled) {
+    // Apply fade effect to the video
     videoElement.classList.add('fade');
+    
+    // Switch to back camera when fade effect is applied
+    switchCamera('back');
   } else {
+    // Remove fade effect
     videoElement.classList.remove('fade');
+    
+    // Switch to front camera when fade effect is removed
+    switchCamera('front');
   }
 });
+
+// Switch between front and back cameras
+function switchCamera(cameraType) {
+  let newDeviceId = '';
+
+  // Find the front or back camera based on the user's filter state
+  if (cameraType === 'front') {
+    newDeviceId = videoDevices.find(device => device.label.includes('front'))?.deviceId || videoDevices[0].deviceId;
+  } else if (cameraType === 'back') {
+    newDeviceId = videoDevices.find(device => device.label.includes('back'))?.deviceId || videoDevices[0].deviceId;
+  }
+
+  if (newDeviceId !== currentDeviceId) {
+    currentDeviceId = newDeviceId;
+    startCamera(currentDeviceId);
+  }
+}
 
 // Start or stop recording
 startStopButton.addEventListener('click', () => {
@@ -146,18 +171,6 @@ downloadButton.addEventListener('click', () => {
   a.download = 'recorded-video.webm';
   a.click();
 });
-
-// Switch camera (front/back)
-switchCameraButton.addEventListener('click', () => {
-  // Get the next video device in the list (loop back to the first device if needed)
-  const currentIndex = videoDevices.findIndex(device => device.deviceId === currentDeviceId);
-  const nextIndex = (currentIndex + 1) % videoDevices.length;
-  currentDeviceId = videoDevices[nextIndex].deviceId;
-
-  startCamera(currentDeviceId);  // Restart camera with the new device
-});
-
-</script>
-
+  </script>
 </body>
 </html>
