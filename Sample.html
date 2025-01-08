@@ -58,13 +58,22 @@
         }
 
         .sticky-textarea textarea {
-            flex: 1;
-            padding: 10px;
-            font-size: 16px;
-            border: 1px solid #fff;
-            border-radius: 5px;
-            resize: none;
-        }
+    flex: 1;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    resize: none;
+    overflow-y: scroll; /* Ensure vertical scrolling is enabled */
+
+    /* Hide the scrollbar */
+    scrollbar-width: none; /* Firefox */
+}
+
+.sticky-textarea textarea::-webkit-scrollbar {
+    display: none; /* Chrome, Edge, Safari */
+}
+
 
 /* Styling the scrollbar */
 .sticky-textarea textarea::-webkit-scrollbar {
