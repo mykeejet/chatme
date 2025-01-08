@@ -95,6 +95,24 @@
         .emoji-grid span:hover {
             transform: scale(1.2);
         }
+          @keyframes shake {
+    0%, 100% {
+      transform: translateX(0);
+    }
+    25% {
+      transform: translateX(-5px);
+    }
+    50% {
+      transform: translateX(5px);
+    }
+    75% {
+      transform: translateX(-5px);
+    }
+  }
+
+  .shake {
+    animation: shake 0.5s ease-in-out infinite;
+  }
 
         /* Media Query for Desktop */
         @media (min-width: 1024px) {
@@ -644,6 +662,17 @@
         });
     });
 </script>
+
+    <script>
+  // Select all emojis
+  const emojis = document.querySelectorAll('.emoji');
+
+  // Add the 'shake' class to all emojis
+  emojis.forEach(emoji => {
+    emoji.classList.add('shake');
+  });
+</script>
+
 
 
 </body>
