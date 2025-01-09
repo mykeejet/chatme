@@ -784,36 +784,6 @@ div#emoji-category-namez {
 </script>
 
     
-<script>
-  // Select all emojis
-  const emojis = document.querySelectorAll('.emoji');
-
-  // Function to apply shake animation
-  function shakeEmoji(emoji) {
-    let position = 0; // Track animation frame
-    const shakeInterval = setInterval(() => {
-      position++;
-      if (position % 2 === 0) {
-        emoji.style.transform = 'translateX(-5px)';
-      } else {
-        emoji.style.transform = 'translateX(5px)';
-      }
-
-      // Stop animation after a few shakes
-      if (position >= 10) {
-        clearInterval(shakeInterval);
-        emoji.style.transform = 'translateX(0)'; // Reset position
-      }
-    }, 50); // Frame duration
-  }
-
-  // Apply shake animation to all emojis
-  emojis.forEach((emoji) => {
-    setInterval(() => shakeEmoji(emoji), 2000); // Trigger animation every 2 seconds
-  });
-</script>
-
-
 
 </body>
 </html>
