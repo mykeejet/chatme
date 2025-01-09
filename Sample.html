@@ -604,6 +604,26 @@ div#emoji-category-namez {
             });
         });
     </script>
+
+
+    <script>
+    // Emoji Auto Detector for the second set
+    // Wait for the DOM to load
+    document.addEventListener("DOMContentLoaded", () => {
+        // Select the button with the bear emoji and the second emoji grid
+        const bearEmojiButton = document.querySelector("#clear-btn2");
+        const emojiGrid2 = document.querySelector(".emoji-grid2");
+
+        // Add click event listener to the bear emoji button
+        bearEmojiButton.addEventListener("click", () => {
+            // Scroll to the second emoji grid with smooth behavior
+            emojiGrid2.scrollIntoView({ behavior: "smooth", block: "start" });
+
+            // Log action for debugging
+            console.log("Scrolled to Emoji Grid 2");
+        });
+    });
+</script>
     
 
 
