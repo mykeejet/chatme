@@ -935,7 +935,27 @@ div#emoji-category-namez {
         });
     });
 </script>
-    
+
+
+
+    <script>
+    // Emoji Auto Detector for the third set
+    // Wait for the DOM to load
+    document.addEventListener("DOMContentLoaded", () => {
+        // Select the button with the green apple emoji and the third emoji grid
+        const greenAppleButton = document.querySelector("#clear-btn3");
+        const emojiGrid3 = document.querySelector(".emoji-grid3");
+
+        // Add click event listener to the green apple emoji button
+        greenAppleButton.addEventListener("click", () => {
+            // Scroll to the third emoji grid with smooth behavior
+            emojiGrid3.scrollIntoView({ behavior: "smooth", block: "start" });
+
+            // Log action for debugging
+            console.log("Scrolled to Emoji Grid 3");
+        });
+    });
+</script>
 
 
 <script>
