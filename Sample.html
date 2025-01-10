@@ -898,26 +898,6 @@ div#emoji-category-namez {
     
 </div>
 
-    <script>
-    // Select all span elements
-    const spans = document.querySelectorAll("span");
-
-    // Function to add continuous bounce animation
-    spans.forEach((emoji) => {
-      let position = 0; // Starting position
-      let direction = 1; // Direction of motion (1 = down, -1 = up)
-
-      setInterval(() => {
-        // Update position for the bounce effect
-        position += direction * 2; // Adjust bounce intensity here
-        emoji.style.transform = `translateY(${position}px)`;
-
-        // Reverse direction when reaching bounds
-        if (position >= 10 || position <= 0) direction *= -1;
-      }, 30); // Approx 33 FPS
-    });
-  </script>
-
     
     <script>
         //Emoji Auto detector 
