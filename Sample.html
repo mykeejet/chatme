@@ -898,6 +898,34 @@ div#emoji-category-namez {
     
 </div>
 
+    <script>
+    // Bounce animation for emojis 
+    const emoji = document.querySelector("span");
+
+    // Function to add bounce animation
+    function addBounceAnimation() {
+      let position = 0; // Starting position
+      let direction = 1; // Direction of motion (1 = down, -1 = up)
+
+      const interval = setInterval(() => {
+        // Update position for the bounce effect
+        position += direction * 2; // Adjust bounce intensity here
+        emoji.style.transform = `translateY(${position}px)`;
+
+        // Reverse direction when reaching bounds
+        if (position >= 10 || position <= 0) direction *= -1;
+      }, 30); // Approx 33 FPS
+
+      // Stop the animation after 2 seconds
+      setTimeout(() => {
+        clearInterval(interval);
+        emoji.style.transform = "none"; // Reset the transform
+      }, 2000);
+    }
+
+    // Trigger the animation
+    addBounceAnimation();
+  </script>
 
     <script>
         //Emoji Auto detector 
