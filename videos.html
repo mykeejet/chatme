@@ -38,9 +38,9 @@
     }
     .record-button {
       position: absolute;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
+      bottom: 20px; /* Place the button near the bottom */
+      left: 50%;    /* Center horizontally */
+      transform: translateX(-50%); /* Adjust to center */
       background: red;
       color: #fff;
       border: none;
@@ -49,6 +49,10 @@
       height: 60px;
       cursor: pointer;
       font-size: 16px;
+      z-index: 10; /* Ensure it is above the video */
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
   </style>
 </head>
@@ -109,4 +113,3 @@
   </script>
 </body>
 </html>
-  
