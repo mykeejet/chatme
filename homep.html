@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat Interface</title>
+  <link rel="stylesheet" href="styles.css"> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"/>
+  <style>
+    /* General Styling */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .chat-panel {
+      background-color: #ffffff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      margin: 0 auto;
+    }
+
+    .header {
+      background: linear-gradient(to right, #007AFF, #6BD7FF);
+      color: #ffffff;
+      text-align: center;
+      font-size: 18px;
+      padding: 15px;
+    }
+
+    .messages {
+      flex: 1;
+      padding: 15px;
+      overflow-y: auto;
+      background: #a7b2b7;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .sticky-textarea {
+      position: fixed;
+      bottom: 10px;
+      left: 0;
+      right: 0;
+      background: #fff;
+      padding: 10px;
+      box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .sticky-textarea textarea {
+      flex: 1;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      resize: none;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1023px) {
+      .chat-panel {
+        width: 100%; /* Mobile full width */
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .container {
+        flex-direction: row;
+      }
+
+      .chat-panel {
+        width: 990px;
+        height: 100vh;
+        position: fixed;
+        left: 0;
+        top: 0;
+        max-width: 900px;
+      }
+
+      .messages {
+        padding: 20px;
+        background-image: linear-gradient(to right, rgba(131, 181, 234, 0.7), rgba(160, 193, 244, 0.7)),
+          url(Screenshot_20250102-211849.jpg);
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-blend-mode: multiply;
+      }
+
+      body {
+        margin: 0;
+        height: 100vh;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="chat-panel">
+      <div class="header">Chat Interface</div>
+      <div class="messages">
+        <!-- Messages will appear here -->
+      </div>
+      <div class="sticky-textarea">
+        <textarea placeholder="Type your message..."></textarea>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
