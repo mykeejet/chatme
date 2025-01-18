@@ -84,14 +84,18 @@
     
     let currentIndex = 1; // Start from the second emoji (😆)
 
-    // Add click event to emojis 1, 2, 3 (😆, 😂, 🤣)
+    // Click event for backward scroll (🔙)
     emojis[1].addEventListener('click', () => { scrollEmojis('backward'); }); // For 😆
+    emojis[2].addEventListener('click', () => { scrollEmojis('backward'); });  // For 😂
+    emojis[3].addEventListener('click', () => { scrollEmojis('backward'); });  // For 🤣
+
+    // Click event for forward scroll (▶️)
     emojis[2].addEventListener('click', () => { scrollEmojis('forward'); });  // For 😂
     emojis[3].addEventListener('click', () => { scrollEmojis('forward'); });  // For 🤣
 
     // Function to scroll emojis
     function scrollEmojis(direction) {
-      if (direction === 'backward' && currentIndex > 1) {
+      if (direction === 'backward' && currentIndex > 0) {
         currentIndex -= 1; // Scroll back
       } else if (direction === 'forward' && currentIndex < emojis.length - 2) {
         currentIndex += 1; // Scroll forward
