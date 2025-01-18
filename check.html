@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vertical Emojis - Horizontal Scroll</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<style>
+ body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f9f9f9;
+}
+
+.emoji-slider {
+  display: flex; /* Makes columns horizontal */
+  overflow-x: auto; /* Enable horizontal scrolling */
+  overflow-y: hidden; /* Prevent vertical scrolling */
+  width: 100%; /* Container width */
+  height: 300px; /* Limit the height of the slider */
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  background-color: #fff;
+  scrollbar-width: thin; /* Modern browsers */
+}
+
+.emoji-column {
+  display: flex;
+  flex-direction: column; /* Stack emojis vertically in each column */
+  align-items: center;
+  margin: 0 10px; /* Add spacing between columns */
+}
+
+.emoji {
+  width: 50px;
+  height: 50px;
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+  background-color: #f0f0f0;
+  border-radius: 50%;
+  transition: transform 0.3s;
+  cursor: pointer;
+}
+
+.emoji:hover {
+  transform: scale(1.2);
+}
+
+/* Optional: Customize the scrollbar */
+.emoji-slider::-webkit-scrollbar {
+  height: 8px;
+}
+
+.emoji-slider::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 10px;
+}
+</style>
+  <div class="emoji-slider">
+    <div class="emoji-column">
+      <div class="emoji">😅</div>
+      <div class="emoji">😆</div>
+      <div class="emoji">😂</div>
+      <div class="emoji">🤣</div>
+    </div>
+    <div class="emoji-column">
+      <div class="emoji">😅</div>
+      <div class="emoji">😆</div>
+      <div class="emoji">😂</div>
+      <div class="emoji">🤣</div>
+    </div>
+    <div class="emoji-column">
+      <div class="emoji">😅</div>
+      <div class="emoji">😆</div>
+      <div class="emoji">😂</div>
+      <div class="emoji">🤣</div>
+    </div>
+  </div>
+</body>
+</html>
