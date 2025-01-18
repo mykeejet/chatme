@@ -15,25 +15,27 @@
       background-color: #f9f9f9;
     }
 
-    .emoji-container {
-      width: 100px; /* Width of the visible slider area */
-      height: 200px; /* Height of the emoji column */
-      overflow-x: auto; /* Enable horizontal scrolling */
-      overflow-y: hidden; /* Disable vertical scrolling */
-      display: flex;
-      flex-direction: column; /* Emojis stacked vertically */
-      border: 2px solid #ccc;
-      border-radius: 12px;
-      background-color: #fff;
-      padding: 5px;
-      scrollbar-width: thin; /* For modern browsers */
-    }
+.emoji-container {
+    width: 100px;
+    height: 30px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid #ccc;
+    border-radius: 12px;
+    background-color: #fff;
+    padding: 5px;
+    scrollbar-width: thin;
+}
 
-    .emoji-track {
-      display: flex;
-      flex-direction: row; /* Emojis displayed side by side horizontally */
-      gap: 15px; /* Space between each emoji */
-    }
+.emoji-track {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    position: relative;
+    top: -13px;
+}
 
     .emoji {
       display: flex;
