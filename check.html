@@ -19,32 +19,36 @@
 }
 
 .emoji-container {
-  width: 100px; /* Width of visible slider area */
+  width: 100px; /* Width of the visible slider area */
   height: 30px; /* Height of the emoji column */
-  overflow: hidden; /* Hide overflow content */
+  overflow-x: auto; /* Enable horizontal scrolling */
+  overflow-y: hidden; /* Disable vertical scrolling */
   display: flex;
   border: 2px solid #ccc;
   border-radius: 12px;
   background-color: #fff;
+  padding: 5px;
+  scrollbar-width: thin; /* For modern browsers */
 }
 
 .emoji-track {
-  display: flex;
-  flex-direction: row; /* Emojis arranged horizontally */
-  transition: transform 0.5s ease; /* Smooth sliding animation */
+  display: flex; /* Enables horizontal scrolling */
+  flex-direction: row; /* Emojis are in rows (for horizontal scroll) */
+  gap: 15px; /* Adds space between each vertical column */
 }
 
 .emoji {
   display: flex;
-  flex-direction: column; /* Emojis stacked vertically */
+  flex-direction: column; /* Emojis stacked vertically in each track */
   align-items: center;
   justify-content: center;
-  gap: 15px; /* Space between emojis */
+  gap: 15px; /* Space between each emoji */
   font-size: 30px;
-  width: 100px; /* Each emoji block is the same width as the container */
+  width: 60px; /* Width of each column */
+  height: auto; /* Adjust height based on content */
   background-color: #f0f0f0;
   border-radius: 10px;
-  padding: 10px;
+  padding: 5px;
   cursor: pointer;
   transition: transform 0.2s;
 }
@@ -53,6 +57,15 @@
   transform: scale(1.1);
 }
 
+/* Custom scrollbar for aesthetics */
+.emoji-container::-webkit-scrollbar {
+  height: 6px; /* Horizontal scrollbar size */
+}
+
+.emoji-container::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 10px;
+}
   </style>
   <div class="emoji-container">
     <div class="emoji-track">
