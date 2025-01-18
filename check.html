@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vertical Emojis Slider</title>
+  <title>Vertical Emojis Sliding Horizontally</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -17,11 +17,11 @@
 
     .emoji-container {
       width: 100px; /* Width of the visible slider area */
-      height: 30px; /* Height of the emoji column */
+      height: 200px; /* Height of the emoji column */
+      overflow-x: auto; /* Enable horizontal scrolling */
       overflow-y: hidden; /* Disable vertical scrolling */
-      overflow-x: hidden; /* Disable horizontal scrolling */
       display: flex;
-      flex-direction: column; /* Stack emojis vertically */
+      flex-direction: column; /* Emojis stacked vertically */
       border: 2px solid #ccc;
       border-radius: 12px;
       background-color: #fff;
@@ -31,23 +31,19 @@
 
     .emoji-track {
       display: flex;
-      flex-direction: column; /* Ensure emojis are stacked vertically */
-      gap: 15px;
-      transition: transform 0.3s ease-in-out; /* Smooth sliding transition */
+      flex-direction: row; /* Emojis displayed side by side horizontally */
+      gap: 15px; /* Space between each emoji */
     }
 
     .emoji {
       display: flex;
-      flex-direction: column; /* Emojis stacked vertically */
-      align-items: center;
       justify-content: center;
-      gap: 15px; /* Space between each emoji */
+      align-items: center;
       font-size: 30px;
-      width: 60px; /* Width of each emoji block */
-      height: 60px; /* Set height for each emoji block */
+      width: 60px;
+      height: 60px;
       background-color: #f0f0f0;
       border-radius: 10px;
-      padding: 5px;
       cursor: pointer;
       transition: transform 0.2s;
     }
@@ -58,7 +54,7 @@
 
     /* Custom scrollbar for aesthetics */
     .emoji-container::-webkit-scrollbar {
-      width: 6px; /* Vertical scrollbar size */
+      height: 6px; /* Horizontal scrollbar size */
     }
 
     .emoji-container::-webkit-scrollbar-thumb {
@@ -104,9 +100,9 @@
 
     // Function to update the container's scroll position
     function updateTrackPosition() {
-      const emojiHeight = emojis[0].clientHeight; // Get the height of one emoji block
-      const offset = currentIndex * emojiHeight; // Calculate the offset for sliding
-      emojiTrack.style.transform = `translateY(-${offset}px)`; // Slide vertically
+      const emojiWidth = emojis[0].clientWidth; // Get the width of one emoji block
+      const offset = currentIndex * emojiWidth; // Calculate the offset for sliding
+      emojiTrack.style.transform = `translateX(-${offset}px)`; // Slide horizontally
     }
   </script>
 </body>
