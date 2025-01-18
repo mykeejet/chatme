@@ -76,7 +76,7 @@
       <div class="emoji">😆</div>
       <div class="emoji">😂</div>
       <div class="emoji">🤣</div>
-      <div class="emoji" id="fixed-emoji">😎</div> <!-- This emoji won't have scroll-back behavior -->
+      <div class="emoji">😎</div>
     </div>
   </div>
 
@@ -86,24 +86,22 @@
     
     let currentIndex = 0; // Track the current position
 
-    // Add click event to each emoji (excluding the last one)
+    // Add click event to each emoji
     emojis.forEach((emoji, index) => {
-      if (emoji.id !== 'fixed-emoji') { // Exclude the last emoji from the logic
-        emoji.addEventListener('click', () => {
-          if (index === 3) {  // When the emoji clicked is '🤣' (index 3)
-            // Start scrolling back to the previous emoji if at the end
-            currentIndex = Math.max(currentIndex - 1, 0); // Ensure it doesn't go below 0
-          } else if (currentIndex + 2 < emojis.length - 1) {
-            // Move to the next-next emoji (skip one emoji) except the last one
-            currentIndex = index + 2;
-          } else if (currentIndex + 1 < emojis.length - 1) {
-            // If near the end, move to the second to last emoji
-            currentIndex = emojis.length - 2;
-          }
+      emoji.addEventListener('click', () => {
+        if (index === 1 || index === 2 || index === 3) {  // When the emoji clicked is '😆', '😂', or '🤣'
+          // Start scrolling back to the previous emoji if at the end
+          currentIndex = Math.max(currentIndex - 1, 0); // Ensure it doesn't go below 0
+        } else if (currentIndex + 2 < emojis.length) {
+          // Move to the next-next emoji (skip one emoji)
+          currentIndex = index + 2;
+        } else if (currentIndex + 1 < emojis.length) {
+          // If near the end, move to the last emoji
+          currentIndex = emojis.length - 1;
+        }
 
-          updateTrackPosition();
-        });
-      }
+        updateTrackPosition();
+      });
     });
 
     // Function to update the container's scroll position
