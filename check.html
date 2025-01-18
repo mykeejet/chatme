@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Vertical Emojis Sliding Horizontally with Scroll-Back</title>
   <style>
-    /* Preventing the whole page from moving */
     body {
       font-family: Arial, sans-serif;
       margin: 0;
@@ -58,9 +57,8 @@
       transform: scale(1.1);
     }
 
-    /* Custom scrollbar for aesthetics */
     .emoji-container::-webkit-scrollbar {
-      height: 6px; /* Horizontal scrollbar size */
+      height: 6px;
     }
 
     .emoji-container::-webkit-scrollbar-thumb {
@@ -84,24 +82,22 @@
     const emojiTrack = document.querySelector('.emoji-track');
     const emojis = document.querySelectorAll('.emoji');
     
-    let currentIndex = 0; // Track the current position
+    let currentIndex = 1; // Start from the second emoji (😆)
 
-    // Add click event to each emoji
-    emojis.forEach((emoji, index) => {
-      emoji.addEventListener('click', () => {
-        // Backward scroll behavior for '😆', '😂', and '🤣' emojis
-        if (index === 1 || index === 2 || index === 3) {  
-          currentIndex = Math.max(currentIndex - 1, 0); // Scroll back to the previous emoji
-        } 
-        // Forward scroll behavior for '😆', '😂', and '🤣' emojis
-        else if (index === 1 || index === 2 || index === 3) {
-          // Move to the next emoji
-          currentIndex = Math.min(currentIndex + 1, emojis.length - 1); // Ensure it doesn't go beyond the last emoji
-        }
+    // Add click event to emojis 1, 2, 3 (😆, 😂, 🤣)
+    emojis[1].addEventListener('click', () => { scrollEmojis('backward'); });
+    emojis[2].addEventListener('click', () => { scrollEmojis('forward'); });
+    emojis[3].addEventListener('click', () => { scrollEmojis('forward'); });
 
-        updateTrackPosition();
-      });
-    });
+    // Function to scroll emojis
+    function scrollEmojis(direction) {
+      if (direction === 'backward' && currentIndex > 1) {
+        currentIndex -= 1; // Scroll back
+      } else if (direction === 'forward' && currentIndex < emojis.length - 2) {
+        currentIndex += 1; // Scroll forward
+      }
+      updateTrackPosition();
+    }
 
     // Function to update the container's scroll position
     function updateTrackPosition() {
