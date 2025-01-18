@@ -18,8 +18,8 @@
     .emoji-container {
       width: 100px; /* Width of the visible slider area */
       height: 30px; /* Height of the emoji column */
+      overflow-y: hidden; /* Disable vertical scrolling */
       overflow-x: hidden; /* Disable horizontal scrolling */
-      overflow-y: auto; /* Enable vertical scrolling */
       display: flex;
       flex-direction: column; /* Stack emojis vertically */
       border: 2px solid #ccc;
@@ -27,6 +27,13 @@
       background-color: #fff;
       padding: 5px;
       scrollbar-width: thin; /* For modern browsers */
+    }
+
+    .emoji-track {
+      display: flex;
+      flex-direction: column; /* Ensure emojis are stacked vertically */
+      gap: 15px;
+      transition: transform 0.3s ease-in-out; /* Smooth sliding transition */
     }
 
     .emoji {
@@ -62,15 +69,17 @@
 </head>
 <body>
   <div class="emoji-container">
-    <div class="emoji">😅</div>
-    <div class="emoji">😆</div>
-    <div class="emoji">😂</div>
-    <div class="emoji">🤣</div>
-    <div class="emoji">😎</div>
+    <div class="emoji-track">
+      <div class="emoji">😅</div>
+      <div class="emoji">😆</div>
+      <div class="emoji">😂</div>
+      <div class="emoji">🤣</div>
+      <div class="emoji">😎</div>
+    </div>
   </div>
 
   <script>
-    const emojiContainer = document.querySelector('.emoji-container');
+    const emojiTrack = document.querySelector('.emoji-track');
     const emojis = document.querySelectorAll('.emoji');
     
     let currentIndex = 0; // Track the current position
@@ -96,11 +105,8 @@
     // Function to update the container's scroll position
     function updateTrackPosition() {
       const emojiHeight = emojis[0].clientHeight; // Get the height of one emoji block
-      const offset = currentIndex * emojiHeight; // Calculate the offset for scrolling
-      emojiContainer.scrollTo({
-        top: offset,
-        behavior: 'smooth' // Smooth scrolling
-      });
+      const offset = currentIndex * emojiHeight; // Calculate the offset for sliding
+      emojiTrack.style.transform = `translateY(-${offset}px)`; // Slide vertically
     }
   </script>
 </body>
