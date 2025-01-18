@@ -1037,6 +1037,9 @@ div#emoji-category-namez {
 </svg>
 
         </button> 
+        <button id="clear-btn4" aria-label="Backspace">
+            <i class="ri-ship-line"></i>
+        </button>
     </div>
     
 </div>
@@ -1077,6 +1080,25 @@ div#emoji-category-namez {
 
             // Log action for debugging
             console.log("Scrolled to Emoji Grid 2");
+        });
+    });
+</script>
+
+    <script>
+    // Emoji Auto Detector for the fourth set
+    // Wait for the DOM to load
+    document.addEventListener("DOMContentLoaded", () => {
+        // Select the button with the rocket emoji and the fourth emoji grid
+        const rocketEmojiButton = document.querySelector("#clear-btn4");
+        const emojiGrid4 = document.querySelector(".emoji-grid4");
+
+        // Add click event listener to the rocket emoji button
+        rocketEmojiButton.addEventListener("click", () => {
+            // Scroll to the fourth emoji grid with smooth behavior
+            emojiGrid4.scrollIntoView({ behavior: "smooth", block: "start" });
+
+            // Log action for debugging
+            console.log("Scrolled to Emoji Grid 4");
         });
     });
 </script>
