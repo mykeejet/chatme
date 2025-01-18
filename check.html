@@ -89,15 +89,14 @@
     // Add click event to each emoji
     emojis.forEach((emoji, index) => {
       emoji.addEventListener('click', () => {
-        if (index === 1 || index === 2 || index === 3) {  // When the emoji clicked is '😆', '😂', or '🤣'
-          // Start scrolling back to the previous emoji if at the end
-          currentIndex = Math.max(currentIndex - 1, 0); // Ensure it doesn't go below 0
-        } else if (currentIndex + 2 < emojis.length) {
-          // Move to the next-next emoji (skip one emoji)
-          currentIndex = index + 2;
-        } else if (currentIndex + 1 < emojis.length) {
-          // If near the end, move to the last emoji
-          currentIndex = emojis.length - 1;
+        // Backward scroll behavior for '😆', '😂', and '🤣' emojis
+        if (index === 1 || index === 2 || index === 3) {  
+          currentIndex = Math.max(currentIndex - 1, 0); // Scroll back to the previous emoji
+        } 
+        // Forward scroll behavior for '😆', '😂', and '🤣' emojis
+        else if (index === 1 || index === 2 || index === 3) {
+          // Move to the next emoji
+          currentIndex = Math.min(currentIndex + 1, emojis.length - 1); // Ensure it doesn't go beyond the last emoji
         }
 
         updateTrackPosition();
