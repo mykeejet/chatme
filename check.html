@@ -9,100 +9,96 @@
 <body>
   <style>
     body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #f9f9f9;
-}
+      font-family: Arial, sans-serif;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f9f9f9;
+    }
 
-.emoji-container {
-  width: 100px; /* Width of the visible slider area */
-  height: 30px; /* Height of the emoji column */
-  overflow-x: auto; /* Enable horizontal scrolling */
-  overflow-y: hidden; /* Disable vertical scrolling */
-  display: flex;
-  border: 2px solid #ccc;
-  border-radius: 12px;
-  background-color: #fff;
-  padding: 5px;
-  scrollbar-width: thin; /* For modern browsers */
-}
+    .emoji-container {
+      width: 100px; /* Width of the visible slider area */
+      height: 200px; /* Height of the emoji column */
+      overflow-x: hidden; /* Disable horizontal scrolling */
+      overflow-y: auto; /* Enable vertical scrolling */
+      display: flex;
+      flex-direction: column;
+      border: 2px solid #ccc;
+      border-radius: 12px;
+      background-color: #fff;
+      padding: 5px;
+      scrollbar-width: thin; /* For modern browsers */
+    }
 
-.emoji-track {
-  display: flex; /* Enables horizontal scrolling */
-  flex-direction: row; /* Emojis are in rows (for horizontal scroll) */
-  gap: 15px; /* Adds space between each vertical column */
-}
+    .emoji {
+      display: flex;
+      flex-direction: column; /* Emojis stacked vertically */
+      align-items: center;
+      justify-content: center;
+      gap: 15px; /* Space between each emoji */
+      font-size: 30px;
+      width: 60px; /* Width of each emoji block */
+      height: 60px; /* Set height for each emoji block */
+      background-color: #f0f0f0;
+      border-radius: 10px;
+      padding: 5px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
 
-.emoji {
-  display: flex;
-  flex-direction: column; /* Emojis stacked vertically in each track */
-  align-items: center;
-  justify-content: center;
-  gap: 15px; /* Space between each emoji */
-  font-size: 30px;
-  width: 60px; /* Width of each column */
-  height: auto; /* Adjust height based on content */
-  background-color: #f0f0f0;
-  border-radius: 10px;
-  padding: 5px;
-  cursor: pointer;
-  transition: transform 0.2s;
-}
+    .emoji:hover {
+      transform: scale(1.1);
+    }
 
-.emoji:hover {
-  transform: scale(1.1);
-}
+    /* Custom scrollbar for aesthetics */
+    .emoji-container::-webkit-scrollbar {
+      width: 6px; /* Vertical scrollbar size */
+    }
 
-/* Custom scrollbar for aesthetics */
-.emoji-container::-webkit-scrollbar {
-  height: 6px; /* Horizontal scrollbar size */
-}
-
-.emoji-container::-webkit-scrollbar-thumb {
-  background-color: #ccc;
-  border-radius: 10px;
-}
+    .emoji-container::-webkit-scrollbar-thumb {
+      background-color: #ccc;
+      border-radius: 10px;
+    }
   </style>
   <div class="emoji-container">
-    <div class="emoji-track">
-      <div class="emoji">😅</div>
-      <div class="emoji">😆</div>
-      <div class="emoji">😂</div>
-      <div class="emoji">🤣</div>
-      <div class="emoji">😎</div>
-    </div>
+    <div class="emoji">😅</div>
+    <div class="emoji">😆</div>
+    <div class="emoji">😂</div>
+    <div class="emoji">🤣</div>
+    <div class="emoji">😎</div>
   </div>
-<script>
-  //emoji checker to right and left
-  const emojiTrack = document.querySelector('.emoji-track');
-const emojis = document.querySelectorAll('.emoji');
 
-let currentIndex = 0; // Track the current position
+  <script>
+  const emojiContainer = document.querySelector('.emoji-container');
+  const emojis = document.querySelectorAll('.emoji');
+  
+  let currentIndex = 0; // Track the current position
 
-// Add click event to each emoji
-emojis.forEach((emoji, index) => {
-  emoji.addEventListener('click', () => {
-    if (index > currentIndex) {
-      // Move to the right (next emoji)
-      currentIndex++;
-    } else if (index < currentIndex) {
-      // Move to the left (previous emoji)
-      currentIndex--;
-    }
-    updateTrackPosition();
+  // Add click event to each emoji
+  emojis.forEach((emoji, index) => {
+    emoji.addEventListener('click', () => {
+      if (index + 2 < emojis.length) {
+        // Move to the next-next emoji (skip one emoji)
+        currentIndex = index + 2;
+      } else if (index + 1 < emojis.length) {
+        // If near the end, move to the last emoji
+        currentIndex = emojis.length - 1;
+      }
+      updateTrackPosition();
+    });
   });
-});
 
-// Function to update the track's position
-function updateTrackPosition() {
-  const emojiWidth = emojis[0].clientWidth; // Get the width of one emoji block
-  const offset = currentIndex * -emojiWidth; // Calculate the offset
-  emojiTrack.style.transform = `translateX(${offset}px)`; // Apply the transformation
-}
+  // Function to update the container's scroll position
+  function updateTrackPosition() {
+    const emojiHeight = emojis[0].clientHeight; // Get the height of one emoji block
+    const offset = currentIndex * emojiHeight; // Calculate the offset for scrolling
+    emojiContainer.scrollTo({
+      top: offset,
+      behavior: 'smooth' // Smooth scrolling
+    });
+  }
 </script>
 </body>
 </html>
