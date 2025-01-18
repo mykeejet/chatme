@@ -5,9 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Vertical Emojis Sliding Horizontally with Scroll-Back</title>
   <style>
+    /* Preventing the whole page from moving */
     body {
       font-family: Arial, sans-serif;
       margin: 0;
+      padding: 0;
+      overflow: hidden; /* Prevent the entire body from scrolling */
       display: flex;
       justify-content: center;
       align-items: center;
@@ -27,6 +30,7 @@
       background-color: #fff;
       padding: 5px;
       scrollbar-width: thin;
+      box-sizing: border-box;
     }
 
     .emoji-track {
