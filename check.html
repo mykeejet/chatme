@@ -4,9 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Vertical Emojis Slider</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -20,11 +17,11 @@
 
     .emoji-container {
       width: 100px; /* Width of the visible slider area */
-      height: 200px; /* Height of the emoji column */
+      height: 30px; /* Height of the emoji column */
       overflow-x: hidden; /* Disable horizontal scrolling */
       overflow-y: auto; /* Enable vertical scrolling */
       display: flex;
-      flex-direction: column;
+      flex-direction: column; /* Stack emojis vertically */
       border: 2px solid #ccc;
       border-radius: 12px;
       background-color: #fff;
@@ -62,6 +59,8 @@
       border-radius: 10px;
     }
   </style>
+</head>
+<body>
   <div class="emoji-container">
     <div class="emoji">😅</div>
     <div class="emoji">😆</div>
@@ -70,39 +69,39 @@
     <div class="emoji">😎</div>
   </div>
 
-<script>
-  const emojiContainer = document.querySelector('.emoji-container');
-  const emojis = document.querySelectorAll('.emoji');
-  
-  let currentIndex = 0; // Track the current position
+  <script>
+    const emojiContainer = document.querySelector('.emoji-container');
+    const emojis = document.querySelectorAll('.emoji');
+    
+    let currentIndex = 0; // Track the current position
 
-  // Add click event to each emoji
-  emojis.forEach((emoji, index) => {
-    emoji.addEventListener('click', () => {
-      if (currentIndex + 2 < emojis.length) {
-        // Move to the next-next emoji (skip one emoji)
-        currentIndex = index + 2;
-      } else if (currentIndex + 1 < emojis.length) {
-        // If near the end, move to the last emoji
-        currentIndex = emojis.length - 1;
-      } else {
-        // If at the end, start going back left (to the previous emoji)
-        currentIndex = Math.max(currentIndex - 2, 0); // Ensure we don't go below 0
-      }
+    // Add click event to each emoji
+    emojis.forEach((emoji, index) => {
+      emoji.addEventListener('click', () => {
+        if (currentIndex + 2 < emojis.length) {
+          // Move to the next-next emoji (skip one emoji)
+          currentIndex = index + 2;
+        } else if (currentIndex + 1 < emojis.length) {
+          // If near the end, move to the last emoji
+          currentIndex = emojis.length - 1;
+        } else {
+          // If at the end, start going back left (to the previous emoji)
+          currentIndex = Math.max(currentIndex - 2, 0); // Ensure we don't go below 0
+        }
 
-      updateTrackPosition();
+        updateTrackPosition();
+      });
     });
-  });
 
-  // Function to update the container's scroll position
-  function updateTrackPosition() {
-    const emojiHeight = emojis[0].clientHeight; // Get the height of one emoji block
-    const offset = currentIndex * emojiHeight; // Calculate the offset for scrolling
-    emojiContainer.scrollTo({
-      top: offset,
-      behavior: 'smooth' // Smooth scrolling
-    });
-  }
-</script>
+    // Function to update the container's scroll position
+    function updateTrackPosition() {
+      const emojiHeight = emojis[0].clientHeight; // Get the height of one emoji block
+      const offset = currentIndex * emojiHeight; // Calculate the offset for scrolling
+      emojiContainer.scrollTo({
+        top: offset,
+        behavior: 'smooth' // Smooth scrolling
+      });
+    }
+  </script>
 </body>
 </html>
