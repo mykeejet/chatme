@@ -63,20 +63,16 @@
       background: #ccc;
     }
 
-    /* Icons */
-    .icon {
+    /* Captured Photo Preview */
+    #photo-preview {
       position: absolute;
       top: 10px;
-      width: 40px;
-      height: 40px;
-    }
-
-    .flash-icon {
-      left: 10px;
-    }
-
-    .settings-icon {
       right: 10px;
+      width: 200px;
+      height: auto;
+      border: 2px solid #ddd;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      z-index: 10;
     }
   </style>
 </head>
@@ -86,9 +82,11 @@
     <div class="overlay-circle"></div>
     <div class="snap-button" onclick="takePhoto()"></div>
   </div>
+  <img id="photo-preview" style="display: none;" alt="Captured Photo" />
 
   <script>
     const video = document.getElementById("camera-stream");
+    const photoPreview = document.getElementById("photo-preview");
 
     // Access device camera
     navigator.mediaDevices
@@ -100,8 +98,14 @@
         console.error("Error accessing camera: ", err);
       });
 
+    // Use GitHub URL for snapping sound
+    const snapSound = new Audio("camera-taking-photo-type-1-235795.mp3");
+
     // Function to take a photo
     function takePhoto() {
+      // Play snap sound
+      snapSound.play();
+
       const canvas = document.createElement("canvas");
       const context = canvas.getContext("2d");
       canvas.width = video.videoWidth;
@@ -110,12 +114,12 @@
       // Draw video frame onto canvas
       context.drawImage(video, 0, 0, canvas.width, canvas.height);
 
-      // Save the image
+      // Get the image data URL
       const imageData = canvas.toDataURL("image/png");
-      const link = document.createElement("a");
-      link.href = imageData;
-      link.download = "photo.png";
-      link.click();
+
+      // Display the photo in the preview image element
+      photoPreview.src = imageData;
+      photoPreview.style.display = "block";
     }
   </script>
 </body>
