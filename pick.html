@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Camera Snap Interface</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: #f0f0f0;
+    }
+
+    #camera-view {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    video {
+      width: 100%;
+      height: auto;
+      object-fit: cover; /* Ensures the video covers the full screen */
+    }
+
+    /* Filter Overlay */
+    .filter-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      background: rgba(255, 200, 200, 0.1); /* Light reddish filter */
+      mix-blend-mode: multiply; /* Blending effect */
+    }
+
+    /* Overlay Circle */
+    .overlay-circle {
+      position: absolute;
+      top: 40%;
+      left: 50%;
+      width: 100px;
+      height: 100px;
+      background-color: rgba(0, 0, 255, 0.5); /* Blue circle */
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    /* Snap Button */
+    .snap-button {
+      position: absolute;
+      bottom: 20px;
+      width: 60px;
+      height: 60px;
+      background: white;
+      border: 4px solid #ddd;
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .snap-button:active {
+      background: #ccc;
+    }
+
+    /* Icons */
+    .icon {
+      position: absolute;
+      top: 10px;
+      width: 40px;
+      height: 40px;
+    }
+
+    .flash-icon {
+      left: 10px;
+    }
+
+    .settings-icon {
+      right: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div id="camera-view">
+    <video id="camera-stream" autoplay></video>
+    <div class="filter-overlay"></div> <!-- Filter overlay added here -->
+    <div class="overlay-circle"></div>
+    <div class="snap-button" onclick="takePhoto()"></div>
+  </div>
+
+  <script>
+    const video = document.getElementById("camera-stream");
+
+    // Access device camera
+    navigator.mediaDevices
+      .getUserMedia({ video: { facingMode: "environment", width: { ideal: 2560 }, height: { ideal: 1440 } } })
+      .then((stream) => {
+        video.srcObject = stream;
+      })
+      .catch((err) => {
+        console.error("Error accessing camera: ", err);
+      });
+
+    // Function to take a photo
+    function takePhoto() {
+      const canvas = document.createElement("canvas");
+      const context = canvas.getContext("2d");
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+
+      // Draw video frame onto canvas
+      context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+      // Save the image
+      const imageData = canvas.toDataURL("image/png");
+      const link = document.createElement("a");
+      link.href = imageData;
+      link.download = "photo.png";
+      link.click();
+    }
+  </script>
+</body>
+</html>
